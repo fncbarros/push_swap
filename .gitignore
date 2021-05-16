@@ -1,3 +1,8 @@
+checker_Mac
+checker_linux
+push_swap
+./libft
+
 # Prerequisites
 *.d
 
