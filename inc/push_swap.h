@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 13:19:55 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/16 13:38:41 by fbarros          ###   ########.fr       */
+/*   Created: 2021/05/19 09:05:21 by fbarros           #+#    #+#             */
+/*   Updated: 2021/05/19 09:25:01 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-int	main(int argc, char **argv)
+# include "../libft/libft.h"
+
+typedef struct s_dlist
 {
+	int				n;
+	struct s_nlist	*up;
+	struct s_nlist	*low;
+}				t_dlist;
 
-	return (0);
-}
+#endif
