@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   pop.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/19 09:05:21 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/19 12:40:17 by fbarros          ###   ########.fr       */
+/*   Created: 2021/05/19 12:54:42 by fbarros           #+#    #+#             */
+/*   Updated: 2021/05/19 13:12:59 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "../inc/push_swap.h"
 
-# include "../libft/libft.h"
-
-typedef struct	s_stack
+t_list	pop(t_stack *s)
+/*
+ * Deletes 1st node on stack pointed to by s->head
+ * Returns same node*/
 {
-	t_list	*head;
-	ssize_t	size;
-}				t_stack;
+	t_list	*node;
 
-typedef struct s_dlist
-{
-	int				n;
-	struct s_nlist	*up;
-	struct s_nlist	*low;
-}				t_dlist;
-
-#endif
+	node = &(s->head);	/*node points to 1st element of stack*/
+	node->next = NULL;	/*isolates element*/
+	s->head = s->head->next;	/*stack head points to next element*/
+	s->size--;	/*size "decrement"*/
+	return (*node); /*return element pointed to by "node"*/
+}

@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/19 09:05:21 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/19 12:40:17 by fbarros          ###   ########.fr       */
+/*   Created: 2021/05/19 12:40:30 by fbarros           #+#    #+#             */
+/*   Updated: 2021/05/19 12:54:36 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "../inc/push_swap.h"
 
-# include "../libft/libft.h"
-
-typedef struct	s_stack
+void	push(t_list *node, t_stack *s)
+/*
+ *Add node to list pointed by stack's head
+ increment stack size
+ does not pop from previous t_list, ...*/
 {
-	t_list	*head;
-	ssize_t	size;
-}				t_stack;
-
-typedef struct s_dlist
-{
-	int				n;
-	struct s_nlist	*up;
-	struct s_nlist	*low;
-}				t_dlist;
-
-#endif
+	ft_lstadd_back(&(s->head), ft_lstnew(node));
+	s->size++;
+}

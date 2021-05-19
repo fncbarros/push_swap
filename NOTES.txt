@@ -1,6 +1,20 @@
 push_swap Log
 
 
+ARRAY IMPLEMENTATION OF STACKS:
+typedef struct	s_stack
+{
+	int	stack[CAPACITY];
+	int	top;
+}				t_stack;
+
+(/DOUBLY)LINKED LIST IMPLEMENTATION OF STACK:
+typedef struct	s_stack
+{
+	t_list	*head;
+	ssize_t	size;
+}				t_stack;
+
 GETTING ARGUMENTS INTO A LINKED LIST USING LIBFT:
 int	main(int argc, char **argv)
 {
@@ -31,4 +45,28 @@ int	main(int argc, char **argv)
 
 	^ Maybe not the best idea (?)^
 
+POP:
+t_list  pop(t_stack *s)
+/*
+ * Deletes 1st node on stack pointed to by s->head
+ * Returns same node*/
+{
+        t_list  *node;
 
+        node = &(s->head);      /*node points to 1st element of stack*/
+        node->next = NULL;      /*isolates element*/
+        s->head = s->head->next;        /*stack head points to next element*/
+        s->size--;      /*size "decrement"*/
+        return (*node); /*return element pointed to by "node"*/
+}
+
+PUSH:
+void    push(t_list *node, t_stack *s)
+/*
+ *Add node to list pointed by stack's head
+ increment stack size
+ does not pop from previous t_list, ...*/
+{
+        ft_lstadd_back(&(s->head), ft_lstnew(node));
+        s->size++;
+}
