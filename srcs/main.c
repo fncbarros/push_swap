@@ -6,7 +6,7 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 13:19:55 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/19 13:23:36 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/05/19 13:45:30 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ int	main(int argc, char **argv)
 	a.head = ft_lstnew(argv[1]);
 	i = 1;
 	while (++i < argc)
-		ft_lstadd_back(&(a.head), ft_lstnew(argv[i]));
+		ft_lstadd_back(&a.head, ft_lstnew(ft_atoi(argv[i])));
 	a.size = argc - 1;
 	new = a.head;
-	while (new->next)
+
+/*	while (new->next)
 	{
 		n = ft_atoi((char *)new->content);
 		ft_putnbr_fd(n, 1);
@@ -36,7 +37,9 @@ int	main(int argc, char **argv)
 	n = ft_atoi((char *)new->content);
 	ft_putnbr_fd(n, 1);
 	ft_putchar_fd('\n', 1);
-	ft_putnbr_fd(ft_lstsize(a.head), 1);
-//	ft_lstclear(&a, (free)(void *)); //review function pointers
+	ft_putnbr_fd(ft_lstsize(a.head), 1);*/
+	ft_lstclear(&a.head, &free); //review function pointers
+	if (!a.head)
+		ft_putstr_fd("Yeah", 1);
 	return (0);
 }
