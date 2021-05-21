@@ -6,40 +6,26 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 13:19:55 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/19 13:45:30 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/05/21 17:05:46 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
-
+#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
-	int		n;
+	int		n[argc - 1];
 	t_stack	a;
-	t_list	*new;
 	int		i;
 
-	a.head = ft_lstnew(argv[1]);
-	i = 1;
+	i = 0;
 	while (++i < argc)
-		ft_lstadd_back(&a.head, ft_lstnew(ft_atoi(argv[i])));
+		n[i - 1] = ft_atoi(argv[i]);
 	a.size = argc - 1;
-	new = a.head;
-
-/*	while (new->next)
-	{
-		n = ft_atoi((char *)new->content);
-		ft_putnbr_fd(n, 1);
-		ft_putchar_fd('\n', 1);
-		new = new->next;
-	}
-	n = ft_atoi((char *)new->content);
-	ft_putnbr_fd(n, 1);
-	ft_putchar_fd('\n', 1);
-	ft_putnbr_fd(ft_lstsize(a.head), 1);*/
-	ft_lstclear(&a.head, &free); //review function pointers
-	if (!a.head)
-		ft_putstr_fd("Yeah", 1);
+	while (i--)
+		ft_lstadd_front(&a.head, ft_lstnew(&n[i])); //ADDING BOTTOM UP
+	printf("%d\n", *(int *)a.head->content);
+	ft_lstclear(&a.head, &free);
 	return (0);
 }
