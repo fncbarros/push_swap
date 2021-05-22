@@ -1,5 +1,12 @@
 push_swap Log
 
+pa = push(b, a) pb = push(a, b)
+FORGET pop
+
+
+
+
+
 
 ARRAY IMPLEMENTATION OF STACKS:
 typedef struct	s_stack

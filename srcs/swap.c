@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pop.c                                              :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/19 12:54:42 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/22 18:19:48 by fbarros          ###   ########.fr       */
+/*   Created: 2021/05/22 18:57:34 by fbarros           #+#    #+#             */
+/*   Updated: 2021/05/22 20:52:57 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-t_list	pop(t_stack *s)
-/*
- * Deletes 1st node on stack pointed to by s->head
- * Returns same node*/
+void	swap(t_list **lst)
+/*swaps upper 2 elements of stack*/
 {
-	t_list	*node;
+	t_list	*tmp;
+//	t_list	*tmp2;
 
-	node = s->head;	/*node points to 1st element of stack*/
-	node->next = NULL;	/*isolates element*/
-	s->head = s->head->next;	/*stack head points to next element*/
-	s->size--;	/*size "decrement"*/
-	return (*node); /*return element pointed to by "node"*/
+	if ((*lst)->next->next != NULL)
+	{
+		tmp = *lst;
+//		tmp2 = *lst->next->next;
+		*lst = (*lst)->next->next;
+		tmp->next = *lst;
+//		lst->next = lst->next->next;
+//		tmp->next = lst;
+//		tmp2->next = tmp;
+	}
+/*	else
+	{
+		lst->next->next = lst;
+		lst->next = NULL;
+	}
+*/			
 }

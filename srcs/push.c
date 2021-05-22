@@ -6,14 +6,15 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 12:40:30 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/22 18:44:25 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/05/22 18:57:29 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void	push(t_stack *dst, t_stack *src)
+void	push(t_stack *src, t_stack *dst)
 /*
+ * Pushes src to dst
  *Add node to list pointed by stack's head s
  increment stack size
  does not pop from previous t_list, ...
