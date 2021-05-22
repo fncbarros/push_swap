@@ -6,7 +6,7 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 09:05:21 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/19 12:40:17 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/05/22 18:35:06 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,9 @@ typedef struct s_dlist
 	struct s_nlist	*up;
 	struct s_nlist	*low;
 }				t_dlist;
+
+void	display_err(void);
+void	push(t_stack *dst, t_stack *src);
+t_list	pop(t_stack *s);
 
 #endif

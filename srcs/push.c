@@ -6,18 +6,30 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 12:40:30 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/19 12:54:36 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/05/22 18:44:25 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void	push(t_list *node, t_stack *s)
+void	push(t_stack *dst, t_stack *src)
 /*
- *Add node to list pointed by stack's head
+ *Add node to list pointed by stack's head s
  increment stack size
- does not pop from previous t_list, ...*/
+ does not pop from previous t_list, ...
+ updates sizes of both stacks*/
 {
-	ft_lstadd_back(&(s->head), ft_lstnew(node));
-	s->size++;
+	t_list	*tmp;
+
+	if (!src)
+		return ;
+	tmp = src->head;
+	src->head = src->head->next;
+	tmp->next = NULL;
+	if (!dst)
+		dst->head = tmp;
+	else
+		ft_lstadd_front(&dst->head, tmp);
+	dst->size++;
+	src->size--;
 }
