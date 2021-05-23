@@ -6,7 +6,7 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 18:57:34 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/22 20:52:57 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/05/23 12:52:37 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,13 @@ void	swap(t_list **lst)
 /*swaps upper 2 elements of stack*/
 {
 	t_list	*tmp;
-//	t_list	*tmp2;
+	t_list	*tmp2;
 
+	tmp = NULL;
 	if ((*lst)->next->next != NULL)
-	{
-		tmp = *lst;
-//		tmp2 = *lst->next->next;
-		*lst = (*lst)->next->next;
-		tmp->next = *lst;
-//		lst->next = lst->next->next;
-//		tmp->next = lst;
-//		tmp2->next = tmp;
-	}
-/*	else
-	{
-		lst->next->next = lst;
-		lst->next = NULL;
-	}
-*/			
+		tmp = (*lst)->next->next;
+	tmp2 = *lst;
+	*lst = (*lst)->next;
+	tmp2->next = tmp;
+	(*lst)->next = tmp2;
 }
