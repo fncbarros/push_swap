@@ -6,7 +6,7 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 19:27:16 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/22 19:49:58 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/05/24 18:32:12 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	search(t_stack s)
 	ssize_t	i;
 
 	i = 1;
-	while (*(int *)s.head->content < *(int *)s.head->next->content
-		&& s.head->next)
+	while (s.head->next &&
+		*(int *)s.head->content < *(int *)s.head->next->content)
 	{
 		s.head = s.head->next;
 		i++;

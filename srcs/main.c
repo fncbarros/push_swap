@@ -6,7 +6,7 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 13:19:55 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/22 20:52:27 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/05/24 18:37:11 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,24 @@
 #include <stdio.h>
 
 /*DEREFERENCE elements using *(int *)a.head->content */
+
+static void check(t_stack s)
+{
+	if (search(s))
+		printf("ordered");
+	else
+		printf("unordered");
+}
+
+static void printlst(t_list *tmp)
+{
+	while (tmp)
+	{
+		printf("%d\t", *(int *)tmp->content);
+		tmp = tmp->next;
+	}
+	printf("\n");
+}
 
 static void	del(void *content)
 {
@@ -32,13 +50,19 @@ int	main(int argc, char **argv)
 	while (++i < argc)
 		n[i - 1] = ft_atoi(argv[i]);
 	a.size = argc - 1;
+	i--;
 	while (i--)
 		ft_lstadd_front(&a.head, ft_lstnew(&n[i]));
 	if (!a.head)
 		display_err();
-	printf("%d\t%d\n", *(int *)a.head->content, *(int *)a.head->next->content);
-	swap(&a.head);
-	printf("%d\t%d\n", *(int *)a.head->content, *(int *)a.head->next->content);
+
+	/*--test zone--*/
+	printlst(a.head);
+	rotate(&a.head);
+	printlst(a.head);
+	check(a);
+	/*--test zone--*/
+
 	ft_lstclear(&a.head, del);
 	return (0);
 }
