@@ -6,7 +6,7 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 13:19:55 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/24 18:37:11 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/05/24 19:28:59 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ static void check(t_stack s)
 
 static void printlst(t_list *tmp)
 {
+	printf("--------\n");
 	while (tmp)
 	{
-		printf("%d\t", *(int *)tmp->content);
+		printf("%d\n", *(int *)tmp->content);
 		tmp = tmp->next;
 	}
-	printf("\n");
+	printf("--------\n");
 }
 
 static void	del(void *content)
@@ -58,7 +59,7 @@ int	main(int argc, char **argv)
 
 	/*--test zone--*/
 	printlst(a.head);
-	rotate(&a.head);
+	rotate(&a.head, 0);
 	printlst(a.head);
 	check(a);
 	/*--test zone--*/
