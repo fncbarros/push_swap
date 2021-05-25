@@ -6,11 +6,11 @@
 #    By: fbarros <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/16 12:37:29 by fbarros           #+#    #+#              #
-#    Updated: 2021/05/16 12:48:29 by fbarros          ###   ########.fr        #
+#    Updated: 2021/05/25 12:29:15 by fbarros          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= $(wildcard *.c)
+SRCS	= $(wildcard srcs/*.c)
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -36,13 +36,13 @@ $(LIBFT):
 			$(CC) $(NAME) $(FLAGS) -c $< -o $(<:.c=.o)
 
 $(NAME):	$(LIBFT) $(OBJS)
-			ar -x $(LIBFT)
+			$(CC) $(NAME) $(CFLAGS) $(LIBFTOBJS) $(OBJS)
 	
 clean:
 			make clean -C ./libft
 			$(RM) *.o $(OBJS)
 
-fclean:
+fclean:		clean
 			$(RM) $(NAME) $(LIBFT)
 
 re:			fclean all

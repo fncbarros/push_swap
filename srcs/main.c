@@ -6,7 +6,7 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 13:19:55 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/24 20:29:47 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/05/25 12:34:22 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void printlst(t_list *tmp)
 
 
 static int	arg_check(char **arg)
+/*MAX_INT MIN_INT ...:<-----------------------------*/
 {
 	int i;
 	int j;
@@ -96,19 +97,21 @@ int	main(int argc, char **argv)
 		n[i - 1] = ft_atoi(argv[i]);
 	if(!num_check(n, argc - 1))
 		display_err();
+	a.head = NULL;
 	a.size = argc - 1;
 	i--;
 	while (i--)
 		ft_lstadd_front(&a.head, ft_lstnew(&n[i]));
 	if (!a.head)
 		display_err();
-
+	rotate(&a.head, 0);
+	ft_putstr_fd("ra\n", 1);
 	/*--test zone--*/
-	printlst(a.head);
+/*	printlst(a.head);
 	rotate(&a.head, 0);
 	printlst(a.head);
 	check(a);
-	/*--test zone--*/
+*/	/*--test zone--*/
 
 	ft_lstclear(&a.head, del);
 	return (0);
