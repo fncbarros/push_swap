@@ -6,7 +6,7 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 09:05:21 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/24 19:19:44 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/05/25 12:57:20 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void	push(t_stack *src, t_stack *dst);
 int	search(t_stack s);
 void	swap(t_list **lst);
 void	rotate(t_list **lst, char r);
+void	exec(char *arg, t_stack *a, t_stack *b);
 
 #endif
