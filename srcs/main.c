@@ -6,7 +6,7 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 13:19:55 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/29 16:34:16 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/05/29 19:34:02 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void check(t_stack s)
 		printf("unordered");
 }
 
-static void printlst(t_list *tmp)
+/*static*/ void printlst(t_list *tmp)
 {
 	printf("--------\n");
 	while (tmp)
@@ -90,7 +90,7 @@ int	main(int argc, char **argv)
 	t_stack	a;
 	int		i;
 
-	if (argc < 2 || !arg_check(argv + 1))
+	if (!arg_check(argv + 1)) /*IF $ARG used argc == 1*/
 		display_err();
 	i = 0;
 	while (++i < argc)
@@ -105,7 +105,11 @@ int	main(int argc, char **argv)
 	if (!a.head)
 		display_err();
 	/*--test zone--*/
-
+	printf("stack a:\n");
+	printlst(a.head);
+	quick_sort(&a);
+	printf("stack a:\n");
+	printlst(a.head);
 	/*--test zone--*/
 
 	ft_lstclear(&a.head, del);

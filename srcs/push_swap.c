@@ -6,11 +6,16 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 15:00:45 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/29 17:45:47 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/05/29 19:34:07 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
+
+/*-----REMOVE------*/
+#include <stdio.h>
+void printlst(t_list *tmp);
+/*-----REMOVE------*/
 
 static void	b_init(t_stack *b)
 {
@@ -18,47 +23,62 @@ static void	b_init(t_stack *b)
 	b->size = 0;
 }
 
-static int	hold(t_stack *s, int *i, int *j, int min, int max)
+static int	chunk_sort(t_stack *s, int *i, int *j, int min, int max)
 {
-	while (i++ != (s->size / 2) && s.head)
+	int	tmp;
+
+	while ((*i)++ != (int)(s->size / 2) && s->head)
 	{
-		if (*(int *)s->content >= min && *(int *)s->content < max)
+		if (*(int *)s->head->content >= min && *(int *)s->head->content < max)
 			break ;
-		s = s->next;
+		s->head = s->head->next;
 	}
-	j = s->size / 2;
-	while (s.head)
+	tmp = *i;
+	while (tmp++ != s->size)
+		s->head = s->head->next;
+	tmp = s->size / 2;
+	*j = 0;
+	while (s->head)
 	{
-		if (*(int *)s->content >= min && *(int *)s->content < max)
-			j = ;
-		s = s->next;
-		j++;
+		if (*(int *)s->head->content >= min && *(int *)s->head->content < max)
+			*j = tmp;
+		s->head = s->head->next;
+		tmp++;
 	}
-	return(j);
+	if (*i == (int)(s->size / 2) && *j == 0)
+		return(0);
+	else
+		return (1);
 }
 
-void	quick_sort(t_stacks *a)
+void	quick_sort(t_stack *a)
 {
 	int 	first;
 	int		second;
 	int		range;
 	int		i;
+	t_stack b;
 
 	i = 0;
 	range = a->size / 5;
 	while (i++ < 5)
 	{
-		hold(a, &first, &second, range - (range * i), range * i);
-		if (first < second)
+		while (chunk_sort(a, &first, &second, range - (range * i), range * i))
 		{
-			while (first--)
-				exec("ra", a, 0);
+			if (first <= second)
+			{
+				while (first--)
+					exec("ra", a, 0);
+			}
+			else
+			{
+				while (second--)
+					exec("rra", a, 0);
+			}
+			exec("pb", a, &b);
 		}
-		else
-		{
-			while (second--)
-				exec("rra", a, 0);
-		}
-		exec("pb", a, &b);
 	}
+	printf("stack b:\n");
+	printlst(b.head);
+	printf("stack b:\n");
 }
