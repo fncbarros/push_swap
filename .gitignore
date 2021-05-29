@@ -2,7 +2,9 @@ checker_Mac
 checker_linux
 push_swap
 ./libft
+./2nd_impl/libft
 .*.swp
+*.pdf
 
 # Prerequisites
 *.d

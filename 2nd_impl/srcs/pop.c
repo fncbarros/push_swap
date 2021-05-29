@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search.c                                           :+:      :+:    :+:   */
+/*   pop.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/22 19:27:16 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/29 14:48:21 by fbarros          ###   ########.fr       */
+/*   Created: 2021/05/19 12:54:42 by fbarros           #+#    #+#             */
+/*   Updated: 2021/05/22 18:19:48 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-int	search(t_stack s)
-/*...or int search(t_stack *s)??
- * return 0 if out of order
- *if s.head->next != NULL
-	return i is a bit useless
- * */
+t_list	pop(t_stack *s)
+/*
+ * Deletes 1st node on stack pointed to by s->head
+ * Returns same node*/
 {
-	ssize_t	i;
+	t_list	*node;
 
-	i = 1;
-	while (s.head->next &&
-		*(int *)s.head->content < *(int *)s.head->next->content)
-	{
-		s.head = s.head->next;
-		i++;
-	}
-	if (s.size != i)
-		return (i);
-	else
-		return (0);
+	node = s->head;	/*node points to 1st element of stack*/
+	node->next = NULL;	/*isolates element*/
+	s->head = s->head->next;	/*stack head points to next element*/
+	s->size--;	/*size "decrement"*/
+	return (*node); /*return element pointed to by "node"*/
 }
