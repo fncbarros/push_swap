@@ -1,6 +1,7 @@
 checker_Mac
 checker_linux
 push_swap
+./push_swap_visualizer
 ./libft
 ./2nd_impl/libft
 .*.swp
