@@ -6,7 +6,7 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 09:05:21 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/25 12:57:20 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/05/29 18:37:05 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ typedef struct s_dlist
 
 void	display_err(void);
 void	push(t_stack *src, t_stack *dst);
-int	search(t_stack s);
+int		search(t_stack s);
 void	swap(t_list **lst);
 void	rotate(t_list **lst, char r);
 void	exec(char *arg, t_stack *a, t_stack *b);
+void	quick_sort(t_stack *a);
 
 #endif
