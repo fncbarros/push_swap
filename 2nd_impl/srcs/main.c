@@ -6,7 +6,7 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 13:19:55 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/29 16:34:16 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/07/12 16:27:53 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static void check(t_stack s)
 		printf("unordered");
 }
 
-static void printlst(t_list *tmp)
+static void printlst(t_lst *tmp)
 {
 	printf("--------\n");
 	while (tmp)
 	{
-		printf("%d\n", *(int *)tmp->content);
+		printf("%d\n", tmp->num);
 		tmp = tmp->next;
 	}
 	printf("--------\n");
@@ -59,7 +59,7 @@ static int	arg_check(char **arg)
 	return (1);
 }
 
-static int	num_check(int *n, int len)
+static int	num_check(int **n, int len, char **arg)
 {
 	int i;
 	int j;
@@ -67,47 +67,51 @@ static int	num_check(int *n, int len)
 	i = -1;
 	while (++i < len)
 	{
+		*n[i] = ft_atoi(arg[i + 1]);
 		j = i;
 		while (++j < len)
 		{
-			if (n[i] == n[j])
+			if (*n[i] == *n[j])
+				return (0);
+			if (*n[i] > INT_MAX || *n[i] < INT_MIN)
 				return (0);
 		}
 	}
 	return (1);
 }
 
-static void	del(void *content)
+/*static void	del(void *content)
 {
 	if (!content)
 		return ;
 	content = NULL;
-}
+}*/
 
 int	main(int argc, char **argv)
 {
-	int		n[argc - 1];
-	t_stack	a;
-	int		i;
+	int	n[argc - 1];
+	t_stack	s;
+	int	i;
 
-	if (argc < 2 || !arg_check(argv + 1))
+	s.a = NULL;
+	s.b = NULL;
+	if (argc < 3 || !arg_check(argv + 1))
+		display_err();
+	int	*j = &n[0];
+	if(!num_check(&n[], argc - 1, argv))
 		display_err();
 	i = 0;
+	s.alen = argc - 1;
 	while (++i < argc)
-		n[i - 1] = ft_atoi(argv[i]);
-	if(!num_check(n, argc - 1))
-		display_err();
-	a.head = NULL;
-	a.size = argc - 1;
+		ft_lstadd_front(&s.a, ft_lstnew(n[i]));
 	i--;
-	while (i--)
-		ft_lstadd_front(&a.head, ft_lstnew(&n[i]));
-	if (!a.head)
+	if (!s.a)
 		display_err();
 	/*--test zone--*/
 
 	/*--test zone--*/
 
-	ft_lstclear(&a.head, del);
+//	ft_lstclear(&s.a, del);
+	
 	return (0);
 }

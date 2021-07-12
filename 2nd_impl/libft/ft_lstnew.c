@@ -6,22 +6,22 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 11:59:45 by fbarros           #+#    #+#             */
-/*   Updated: 2021/06/11 17:56:54 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/07/12 15:41:02 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+t_lst	*ft_lstnew(int	num)
 {
-	t_list	*list;
+	t_lst	*lst;
 
-	list = NULL;
-	list = malloc(sizeof(t_list);
-	if (!list)
+	lst = NULL;
+	lst = malloc(sizeof(t_lst));
+	if (!lst)
 		return (NULL);
-	list->next = NULL;
-	list->prev = NULL;
-	list->content = content;
-	return (list);
+	lst->next = NULL;
+	lst->prev = NULL;
+	lst->num = num;
+	return (lst);
 }

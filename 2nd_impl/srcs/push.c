@@ -6,7 +6,7 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 12:40:30 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/22 18:57:29 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/07/12 14:50:46 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	push(t_stack *src, t_stack *dst)
  does not pop from previous t_list, ...
  updates sizes of both stacks*/
 {
-	t_list	*tmp;
+	t_lst	*tmp;
 
 	if (!src)
 		return ;
