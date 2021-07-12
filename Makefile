@@ -6,15 +6,23 @@
 #    By: fbarros <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/16 12:37:29 by fbarros           #+#    #+#              #
-#    Updated: 2021/05/25 12:29:15 by fbarros          ###   ########.fr        #
+#    Updated: 2021/07/12 14:17:41 by fbarros          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= $(wildcard srcs/*.c)
+#---TEMPORARY---#
+
+#ARG	= $(ARG)
+
+#---TEMPORARY---#
+
+SRCS	= srcs/display_err.c srcs/main.c srcs/operations.c srcs/pop.c srcs/push.c srcs/push_swap.c srcs/rotate.c srcs/search.c srcs/swap.c
 
 OBJS	= $(SRCS:.c=.o)
 
 CFLAGS	= -Wall -Wextra -Werror
+
+INCLUDE = inc/
 
 NAME	= push_swap
 
@@ -22,29 +30,40 @@ CC		= gcc -o
 
 RM		= rm -f
 
-LIBFT	= ./libft/libft.a
+LIBFT	= libft.a
 
 LIBFTOBJS	= $(wildcard ./libft/*.o)
 
-all:		$(NAME)
+%.o: %.c
+	$(CC) $(CFLAGS) -c -I $(INCLUDE) $< -o $@
+
+all:	$(NAME)
 
 $(LIBFT):
-			$(MAKE) libft.a -C ./libft
-			cp ./libft/libft.a .
+		$(MAKE) libft.a -C ./libft
+		cp ./libft/libft.a .
 
-.c.o:
-			$(CC) $(NAME) $(FLAGS) -c $< -o $(<:.c=.o)
 
 $(NAME):	$(LIBFT) $(OBJS)
-			$(CC) $(NAME) $(CFLAGS) $(LIBFTOBJS) $(OBJS)
+		$(CC) $(NAME) $(OBJS) $(LIBFT) -o $(NAME)
+
+#---TEMPORARY---#
 	
+debug:	$(LIBFT) $(OBJS)
+		gcc $(CFLAGS) $(LIBFTOBJS) $(OBJS) -o debug
+
+test:	debug
+		lldb ./debug
+#		process launch -- $(ARG)
+#---TEMPORARY---#
+
 clean:
 			make clean -C ./libft
 			$(RM) *.o $(OBJS)
 
 fclean:		clean
-			$(RM) $(NAME) $(LIBFT)
+			$(RM) $(NAME) $(LIBFT) libft/libft.a debug
 
 re:			fclean all
 
-.PHONY:	all clean fclean re
+.PHONY:	all clean fclean re test
