@@ -12,12 +12,14 @@
 
 #include "../inc/push_swap.h"
 
-static void	b_init(t_stack *b)
+static void	b_init(t_stack *s)
 {
-	b->head = NULL;
-	b->size = 0;
+	s->b = NULL;
+	s->blen = 0;
 }
 
+/*---------->can't remember it's use........<--------------*/
+/*
 static int	hold(t_stack *s, int *i, int *j, int min, int max)
 {
 	while (i++ != (s->size / 2) && s.head)
@@ -36,8 +38,10 @@ static int	hold(t_stack *s, int *i, int *j, int min, int max)
 	}
 	return(j);
 }
-
-void	quick_sort(t_stacks *a)
+*/
+/*????????????????????????????????????????????????????????????????*/
+/*
+void	quick_sort(t_stack *s)
 {
 	int 	first;
 	int		second;
@@ -45,20 +49,21 @@ void	quick_sort(t_stacks *a)
 	int		i;
 
 	i = 0;
-	range = a->size / 5;
+	range = s->alen / 5;
 	while (i++ < 5)
 	{
-		hold(a, &first, &second, range - (range * i), range * i);
+		hold(s, &first, &second, range - (range * i), range * i);
 		if (first < second)
 		{
 			while (first--)
-				exec("ra", a, 0);
+				exec("ra", s);
 		}
 		else
 		{
 			while (second--)
-				exec("rra", a, 0);
+				exec("rra", s);
 		}
-		exec("pb", a, &b);
+		exec("pb", s);
 	}
 }
+*/

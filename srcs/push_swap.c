@@ -82,3 +82,23 @@ void	quick_sort(t_stack *a)
 	printlst(b.head);
 	printf("stack b:\n");
 }
+
+void	sort_small(t_stack *a)
+{
+	while (1)
+	{
+		if (*(int *)a->head->next->next < *(int *)a->head)
+			exec("ra", a, 0);
+		if (*(int *)a->head > *(int *)a->head->next)
+			exec("sa", a, 0);
+		if(search(*a))
+			break ;
+	}
+}
+
+void	radix_sort(t_stack *a)
+{
+	(void)a;
+	return ;
+}
+

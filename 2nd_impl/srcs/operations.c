@@ -12,23 +12,31 @@
 
 #include "../inc/push_swap.h"
 
-void	exec(char *arg, t_stack *a, t_stack *b)
+void	exec(char *arg, t_stack *s)
 {
 	char	r;
-	int	i;
+	int		i;
 
 	r = 0;
 	i = 0;
 	if (ft_strnstr(arg, "pa", 2))
-		push(b, a);
+	{
+		push(s, 'a');
+		s->alen++;
+		s->blen--;
+	}
 	else if (ft_strnstr(arg, "pb", 2))
-		push(a, b);
+	{
+		push(s, 'b');
+		s->blen++;
+		s->alen--;
+	}
 	else if (*arg == 's')
 	{
 		if (*(arg + 1) == 'a' || *(arg + 1) == 's')
-			swap(&a->head);
+			swap(&s->a);
 		if (*(arg + 1) == 'b' || *(arg + 1) == 's')
-			swap(&b->head);
+			swap(&s->b);
 	}
 	else if (*arg == 'r')
 	{
@@ -38,10 +46,10 @@ void	exec(char *arg, t_stack *a, t_stack *b)
 			i++;
 		}
 		if (*(arg + i) == 'a' || *(arg + i) == 'r')
-			rotate(&a->head, r);
+			rotate(&s->a, r);
 		if ( *(arg + i)== 'b' || *(arg + i) == 'r')
-			rotate(&b->head, r);
+			rotate(&s->b, r);
 	}
 	ft_putstr_fd(arg, 1);
 	ft_putchar_fd('\n', 1);
-}	
+}

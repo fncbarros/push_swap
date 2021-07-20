@@ -18,7 +18,7 @@
 /*---------------temporary-----------------*/
 static void check(t_stack s)
 {
-	if (search(s))
+	if (search(s, 'a'))
 		printf("ordered");
 	else
 		printf("unordered");
@@ -36,14 +36,29 @@ static void printlst(t_lst *tmp)
 }
 /*---------------temporary-----------------*/
 
+static int	num_check(char *arg)
+{
+	int 	i;
+	int 	j;
+	long	n;
 
-static int	arg_check(char **arg)
-/*MAX_INT MIN_INT ...:<-----------------------------*/
+	i = -1;
+	n = ft_atoi(arg);
+	j = i;
+	if (n > INT_MAX || n < INT_MIN)
+		display_err();
+	return ;
+}
+
+static int	*arg_check(char **arg, int count)
+/*MAX_INT MIN_INT ...:<-----------------------<limits.h>*/
 {
 	int i;
 	int j;
+	int n[count];
+	int	k;
 
-	i = 0;
+	i = 1;
 	while (arg[i])
 	{
 		j = -1;
@@ -52,32 +67,18 @@ static int	arg_check(char **arg)
 		while (arg[i][++j])
 		{
 			if (!ft_isdigit(arg[i][j]))
-				return (0);
+				return (NULL);
+			n[i - 1] = num_check(arg[i]);
+			k = -1;
+			while (++k < (i - 1))
+			{
+				if (n[i - 1] == n[k])
+					display_err();
+			}
 		}
 		i++;
 	}
-	return (1);
-}
-
-static int	num_check(int **n, int len, char **arg)
-{
-	int i;
-	int j;
-
-	i = -1;
-	while (++i < len)
-	{
-		*n[i] = ft_atoi(arg[i + 1]);
-		j = i;
-		while (++j < len)
-		{
-			if (*n[i] == *n[j])
-				return (0);
-			if (*n[i] > INT_MAX || *n[i] < INT_MIN)
-				return (0);
-		}
-	}
-	return (1);
+	return (n);
 }
 
 /*static void	del(void *content)
@@ -89,16 +90,14 @@ static int	num_check(int **n, int len, char **arg)
 
 int	main(int argc, char **argv)
 {
-	int	n[argc - 1];
+	int	*n;
 	t_stack	s;
 	int	i;
 
 	s.a = NULL;
 	s.b = NULL;
-	if (argc < 3 || !arg_check(argv + 1))
-		display_err();
-	int	*j = &n[0];
-	if(!num_check(&n[], argc - 1, argv))
+	n = arg_check(argv + 1, argc - 1);
+	if (argc < 3 || !n || )
 		display_err();
 	i = 0;
 	s.alen = argc - 1;
@@ -109,9 +108,21 @@ int	main(int argc, char **argv)
 		display_err();
 	/*--test zone--*/
 
+	printlst(s.a);
+	exec("pb", &s);
+	exec("pb", &s);
+	printlst(s.a);
+	printlst(s.b);
+	exec("ra", &s);
+	exec("rb", &s);
+	printlst(s.a);
+	printlst(s.b);
+
+	check(s);
+
 	/*--test zone--*/
 
 //	ft_lstclear(&s.a, del);
-	
+	free(n);
 	return (0);
 }

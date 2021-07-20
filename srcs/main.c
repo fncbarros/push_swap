@@ -104,14 +104,22 @@ int	main(int argc, char **argv)
 		ft_lstadd_front(&a.head, ft_lstnew(&n[i]));
 	if (!a.head)
 		display_err();
-	/*--test zone--*/
-	printf("stack a:\n");
-	printlst(a.head);
-	quick_sort(&a);
-	printf("stack a:\n");
-	printlst(a.head);
+	if (!search(a)) // malloc'ing the whole list just to check if ordered not clever... <-------------------------
+	{
 	/*--test zone--*/
 
+	printf("stack a:\n");
+	printlst(a.head);
+//	quick_sort(&a);
+	if (a.size <= 5)
+		sort_small(&a);
+	else
+		radix_sort(&a);
+	printf("stack a:\n");
+	printlst(a.head);
+
+	/*--test zone--*/
+	}
 	ft_lstclear(&a.head, del);
 	return (0);
 }

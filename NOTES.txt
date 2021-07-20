@@ -2,6 +2,8 @@ push_swap Log
 
 pa = push(b, a) pb = push(a, b)
 
+/*DEREFERENCE elements using *(int *)a.head->content */
+
 /*--------------------------------------------------------------------------------------------*/
 SEE 2nd_impl/ for implementation w/ doubly-linked-list and double-stack-struct (w/ int as value)
 set doubly linked lists on libft.h and push_swap.h without thinking...still
@@ -20,7 +22,7 @@ typedef struct	s_stack
 	int	top;
 }		t_stack;
 
-(/DOUBLY)LINKED LIST IMPLEMENTATION OF STACK:
+LINKED LIST IMPLEMENTATION OF STACK:
 typedef struct	s_stack
 {
 	t_list	*head;

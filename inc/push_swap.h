@@ -28,12 +28,19 @@ typedef struct s_dlist
 	struct s_nlist	*low;
 }				t_dlist;
 
+/*just to save me from the pain of having to write the whole eff'n thing*/
+#define ELEMENT_A *(int *)a.head->content
+#define ELEMENT_B *(int *)b.head->content
+
 void	display_err(void);
 void	push(t_stack *src, t_stack *dst);
 int		search(t_stack s);
 void	swap(t_list **lst);
 void	rotate(t_list **lst, char r);
 void	exec(char *arg, t_stack *a, t_stack *b);
+
+void	sort_small(t_stack *a);
 void	quick_sort(t_stack *a);
+void	radix_sort(t_stack *a);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: fbarros <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/16 12:37:29 by fbarros           #+#    #+#              #
-#    Updated: 2021/07/12 14:17:41 by fbarros          ###   ########.fr        #
+#    Updated: 2021/07/14 16:09:49 by fbarros          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 
 #---TEMPORARY---#
 
-SRCS	= srcs/display_err.c srcs/main.c srcs/operations.c srcs/pop.c srcs/push.c srcs/push_swap.c srcs/rotate.c srcs/search.c srcs/swap.c
+SRCS	= srcs/display_err.c srcs/main.c srcs/operations.c srcs/push.c srcs/push_swap.c srcs/rotate.c srcs/search.c srcs/swap.c
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -50,7 +50,7 @@ $(NAME):	$(LIBFT) $(OBJS)
 #---TEMPORARY---#
 	
 debug:	$(LIBFT) $(OBJS)
-		gcc $(CFLAGS) $(LIBFTOBJS) $(OBJS) -o debug
+		gcc $(CFLAGS) $(wildcard ./libft/*.c) $(SRCS) -g -o debug
 
 test:	debug
 		lldb ./debug

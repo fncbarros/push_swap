@@ -12,7 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-int	search(t_stack s)
+int	search(t_stack s, char c)
 /*...or int search(t_stack *s)??
  * return 0 if out of order
  *if s.head->next != NULL
@@ -20,15 +20,24 @@ int	search(t_stack s)
  * */
 {
 	ssize_t	i;
+	ssize_t	r;
+	t_lst	*h;
 
 	i = 1;
-	while (s.head->next &&
-		*(int *)s.head->content < *(int *)s.head->next->content)
+	h = s.a;
+	r = s.alen;
+	if(c == 'b')
 	{
-		s.head = s.head->next;
+		h = s.b;
+		r = s.blen;
+	}
+	while (h->next &&
+		h->num < h->next->num)
+	{
+		h = h->next;
 		i++;
 	}
-	if (s.size != i)
+	if (r != i)
 		return (i);
 	else
 		return (0);

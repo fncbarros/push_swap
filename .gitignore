@@ -6,6 +6,9 @@ push_swap
 ./2nd_impl/libft
 .*.swp
 *.pdf
+.vscode/
+*~
+.*~
 
 # Prerequisites
 *.d

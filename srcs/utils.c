@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search.c                                           :+:      :+:    :+:   */
+/*   display_err.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/22 19:27:16 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/29 14:48:21 by fbarros          ###   ########.fr       */
+/*   Created: 2021/05/22 16:15:22 by fbarros           #+#    #+#             */
+/*   Updated: 2021/05/29 16:16:48 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
+#include <stdio.h> //<---------DEL
+
+void	display_err(void)
+{
+	ft_putstr_fd("Error\n", 2);
+	exit(1);
+}
 
 int	search(t_stack s)
 /*...or int search(t_stack *s)??
@@ -29,7 +36,7 @@ int	search(t_stack s)
 		i++;
 	}
 	if (s.size != i)
-		return (i);
-	else
 		return (0);
+	else
+		return (i);
 }
