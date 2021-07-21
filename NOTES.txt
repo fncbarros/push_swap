@@ -4,13 +4,15 @@ pa = push(b, a) pb = push(a, b)
 
 /*DEREFERENCE elements using *(int *)a.head->content */
 
-/*--------------------------------------------------------------------------------------------*/
+Doubly Linked Lists w/ int n -> need remake lstlast lstnew lstadd_front lstclear
+
+--------------------------------------------------------------------------------
 SEE 2nd_impl/ for implementation w/ doubly-linked-list and double-stack-struct (w/ int as value)
 set doubly linked lists on libft.h and push_swap.h without thinking...still
 using libft functions as well........................
 	lstiter might actually be useful
 
-/*--------------------------------------------------------------------------------------------*/
+--------------------------------------------------------------------------------------------
 
 ARG=`ruby -e "puts (0..99).to_a.shuffle.join(' ')"`
 ----------------->(need create an sh tester script)<-----------------------

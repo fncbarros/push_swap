@@ -27,6 +27,11 @@ static void check(t_stack s)
 /*static*/ void printlst(t_list *tmp)
 {
 	printf("--------\n");
+	if (!tmp)
+	{
+		printf("Empty!\n");
+		return ;
+	}
 	while (tmp)
 	{
 		printf("%d\n", *(int *)tmp->content);
@@ -104,21 +109,22 @@ int	main(int argc, char **argv)
 		ft_lstadd_front(&a.head, ft_lstnew(&n[i]));
 	if (!a.head)
 		display_err();
-	if (!search(a)) // malloc'ing the whole list just to check if ordered not clever... <-------------------------
+	if (!search(a)) // <--------------malloc'ing the whole list just to check if ordered not clever. ---> Check beforehand <---
 	{
-	/*--test zone--*/
+		/*--------------TEST ZONE------------------*/
+		printf("stack a:\n");
+		printlst(a.head);
 
-	printf("stack a:\n");
-	printlst(a.head);
-//	quick_sort(&a);
-	if (a.size <= 5)
-		sort_small(&a);
-	else
-		radix_sort(&a);
-	printf("stack a:\n");
-	printlst(a.head);
+//		quick_sort(&a);
+		if (a.size <= 5)
+			sort_small(&a, b_init());
+		else
+			radix_sort(&a, b_init());
 
-	/*--test zone--*/
+		printf("stack a:\n");
+		printlst(a.head);
+	/*--------------TEST ZONE------------------*/
+
 	}
 	ft_lstclear(&a.head, del);
 	return (0);
