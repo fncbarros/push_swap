@@ -22,7 +22,7 @@ void	push(t_stack *src, t_stack *dst)
 {
 	t_list	*tmp;
 
-	if (!src)
+	if (!src->size)
 		return ;
 	tmp = src->head;
 	src->head = src->head->next;

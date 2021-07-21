@@ -19,6 +19,16 @@ void	display_err(void)
 	exit(1);
 }
 
+t_stack	*b_init(void)
+{
+	t_stack	*b;
+
+	b = (t_stack *)malloc(sizeof(t_stack));
+	b->head = NULL;
+	b->size = 0;
+	return (b);
+}
+
 int	search(t_stack s)
 /*...or int search(t_stack *s)??
  * return 0 if out of order

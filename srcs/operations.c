@@ -39,9 +39,9 @@ void	exec(char *arg, t_stack *a, t_stack *b)
 		}
 		if (*(arg + i) == 'a' || *(arg + i) == 'r')
 			rotate(&a->head, r);
-		if ( *(arg + i)== 'b' || *(arg + i) == 'r')
+		else if ( *(arg + i)== 'b' || *(arg + i) == 'r')
 			rotate(&b->head, r);
 	}
 	ft_putstr_fd(arg, 1);
 	ft_putchar_fd('\n', 1);
-}	
+}

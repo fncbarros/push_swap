@@ -17,12 +17,6 @@
 void printlst(t_list *tmp);
 /*-----REMOVE------*/
 
-static void	b_init(t_stack *b)
-{
-	b->head = NULL;
-	b->size = 0;
-}
-
 static int	chunk_sort(t_stack *s, int *i, int *j, int min, int max)
 {
 	int	tmp;
@@ -51,13 +45,12 @@ static int	chunk_sort(t_stack *s, int *i, int *j, int min, int max)
 		return (1);
 }
 
-void	quick_sort(t_stack *a)
+void	quick_sort(t_stack *a, t_stack *b)
 {
 	int 	first;
 	int		second;
 	int		range;
 	int		i;
-	t_stack b;
 
 	i = 0;
 	range = a->size / 5;
@@ -75,30 +68,43 @@ void	quick_sort(t_stack *a)
 				while (second--)
 					exec("rra", a, 0);
 			}
-			exec("pb", a, &b);
+			exec("pb", a, b);
 		}
 	}
 	printf("stack b:\n");
-	printlst(b.head);
+	printlst(b->head);
 	printf("stack b:\n");
+	free(b);
 }
 
-void	sort_small(t_stack *a)
+void	sort_small(t_stack *a, t_stack *b)
 {
-	while (1)
+	while (!search(*a))
 	{
-		if (*(int *)a->head->next->next < *(int *)a->head)
-			exec("ra", a, 0);
-		if (*(int *)a->head > *(int *)a->head->next)
+		if (*(int *)a->head->content > *(int *)a->head->next->next->content)
+			exec("ra", a, b);
+		else if (*(int *)a->head->content > *(int *)a->head->next->content)
 			exec("sa", a, 0);
-		if(search(*a))
-			break ;
+		else if (*(int *)a->head->next->content > *(int *)a->head->next->next->content)
+			exec("rra", a, 0);
+
+
+
+
+/*		if(search(*a))
+			break ;*/
 	}
+	free(b);
 }
 
-void	radix_sort(t_stack *a)
+void	radix_sort(t_stack *a, t_stack *b)
 {
-	(void)a;
+
+
+	printf("stack b:\n");
+	printlst(b->head);
+
+	free(b);
 	return ;
 }
 
