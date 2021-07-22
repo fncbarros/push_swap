@@ -109,17 +109,16 @@ int	main(int argc, char **argv)
 	if (!search(a)) // <--------------malloc'ing the whole list just to check if ordered not clever. ---> Check beforehand <---
 	{
 		/*--------------TEST ZONE------------------*/
-/*		printf("stack a:\n");
+		printf("stack a:\n");
 		printlst(a.head);
-*///		quick_sort(&a);
-		if (a.size <= 5)
+//		quick_sort(&a);
+//		if (a.size <= 5)
 			sort_small(&a, b_init());
-		else
-			radix_sort(&a, b_init());
-
-/*		printf("stack a:\n");
+//		else
+//			radix_sort(&a, b_init());
+		printf("stack a:\n");
 		printlst(a.head);
-*/	/*--------------TEST ZONE------------------*/
+	/*--------------TEST ZONE------------------*/
 
 	}
 	ft_lstclear(&a.head, del);

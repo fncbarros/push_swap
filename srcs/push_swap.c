@@ -12,8 +12,6 @@
 
 #include "../inc/push_swap.h"
 
-
-
 static int	chunk_sort(t_stack *s, int *i, int *j, int min, int max)
 {
 	int	tmp;
@@ -73,13 +71,3 @@ void	quick_sort(t_stack *a, t_stack *b)
 	printf("stack b:\n");
 	free(b);
 }
-
-void	radix_sort(t_stack *a, t_stack *b)
-{
-
-	(void)a;
-
-	free(b);
-	return ;
-}
-
