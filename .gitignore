@@ -9,6 +9,8 @@ push_swap
 .vscode/
 *~
 .*~
+tester-mac/
+debug
 
 # Prerequisites
 *.d
