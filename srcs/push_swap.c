@@ -77,28 +77,36 @@ void	quick_sort(t_stack *a, t_stack *b)
 	free(b);
 }
 
+
+
 void	sort_small(t_stack *a, t_stack *b)
 {
-	t_list *last;
+	int		top;
+	int		bottom;
 
 	while (a->size > 3)
 		exec("pb", a, b);
-	while (1)
+	while (!search(*a) || b->size)
 	{
-		last = ft_lstlast(a->head);
-		if (*(int *)a->head->content > *(int *)last->content)
-			exec("ra", a, b);
-		if (*(int *)a->head->content > *(int *)a->head->next->content)
-			exec("sa", a, 0);
-		if (*(int *)a->head->next->content > *(int *)a->head->next->next->content)
-			exec("rra", a, 0);
-		if(search(*a))
+		top = *(int *)a->head->content;
+		bottom = *(int *)ft_lstlast(a->head)->content;
+		if (top > bottom)
 		{
-			if (b->size)
-				exec("pa", a, b);
-			else
-				break ;
+			exec("ra", a, 0);
 		}
+		else if (top > *(int *)a->head->next->content)
+		{
+			if (top > *(int *)a->head->next->next->content) //don't like it
+			{
+				exec("ra", a, 0);
+				continue ;
+			}
+			exec("sa", a, 0);
+		}
+		else if (*(int *)a->head->next->content > bottom)
+			exec("rra", a, 0);
+		if (b->size && search(*a))
+			exec("pa", a, b);
 	}
 	free(b);
 }

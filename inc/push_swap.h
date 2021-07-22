@@ -15,7 +15,7 @@
 
 # include "libft.h"
 
-typedef struct	s_stack
+typedef struct s_stack
 {
 	t_list	*head;
 	ssize_t	size;
@@ -28,10 +28,11 @@ typedef struct s_dlist
 	struct s_nlist	*low;
 }				t_dlist;
 
-/*just to save me from the pain of having to write the whole eff'n thing*/
-#define ELEMENT_A *(int *)a->head->content
-#define ELEMENT_B *(int *)b->head->content
-
+/*just to save me from the pain of having to write the whole eff'n thing
+Can't use it tho :(
+# define L_ELEMENT(x) *(int *)x->content
+# define T_ELEMENT(x) *(int *)x->head->content
+*/
 void	display_err(void);
 t_stack	*b_init(void);
 void	push(t_stack *src, t_stack *dst);

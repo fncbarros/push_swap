@@ -3,6 +3,7 @@ push_swap Log
 pa = push(b, a) pb = push(a, b)
 
 /*DEREFERENCE elements using *(int *)a.head->content */
+*(int *)ft_lstlast(a->head)->content WORKS!!
 
 Doubly Linked Lists w/ int n -> need remake lstlast lstnew lstadd_front lstclear
 

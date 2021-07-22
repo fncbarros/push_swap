@@ -114,7 +114,6 @@ int	main(int argc, char **argv)
 		/*--------------TEST ZONE------------------*/
 		printf("stack a:\n");
 		printlst(a.head);
-
 //		quick_sort(&a);
 		if (a.size <= 5)
 			sort_small(&a, b_init());
