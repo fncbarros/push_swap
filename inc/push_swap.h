@@ -15,6 +15,11 @@
 
 # include "libft.h"
 
+/*-----REMOVE------*/
+#include <stdio.h>
+void printlst(t_list *tmp);
+/*-----REMOVE------*/
+
 typedef struct s_stack
 {
 	t_list	*head;

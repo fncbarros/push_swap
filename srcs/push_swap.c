@@ -12,10 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-/*-----REMOVE------*/
-#include <stdio.h>
-void printlst(t_list *tmp);
-/*-----REMOVE------*/
+
 
 static int	chunk_sort(t_stack *s, int *i, int *j, int min, int max)
 {
@@ -77,46 +74,10 @@ void	quick_sort(t_stack *a, t_stack *b)
 	free(b);
 }
 
-
-
-void	sort_small(t_stack *a, t_stack *b)
-{
-	int		top;
-	int		bottom;
-
-	while (a->size > 3)
-		exec("pb", a, b);
-	while (!search(*a) || b->size)
-	{
-		top = *(int *)a->head->content;
-		bottom = *(int *)ft_lstlast(a->head)->content;
-		if (top > bottom)
-		{
-			exec("ra", a, 0);
-		}
-		else if (top > *(int *)a->head->next->content)
-		{
-			if (top > *(int *)a->head->next->next->content) //don't like it
-			{
-				exec("ra", a, 0);
-				continue ;
-			}
-			exec("sa", a, 0);
-		}
-		else if (*(int *)a->head->next->content > bottom)
-			exec("rra", a, 0);
-		if (b->size && search(*a))
-			exec("pa", a, b);
-	}
-	free(b);
-}
-
 void	radix_sort(t_stack *a, t_stack *b)
 {
 
-
-	printf("stack b:\n");
-	printlst(b->head);
+	(void)a;
 
 	free(b);
 	return ;

@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
-#include <stdio.h>
-
-/*DEREFERENCE elements using *(int *)a.head->content */
 
 /*---------------temporary-----------------*/
 static void check(t_stack s)
@@ -112,17 +109,17 @@ int	main(int argc, char **argv)
 	if (!search(a)) // <--------------malloc'ing the whole list just to check if ordered not clever. ---> Check beforehand <---
 	{
 		/*--------------TEST ZONE------------------*/
-		printf("stack a:\n");
+/*		printf("stack a:\n");
 		printlst(a.head);
-//		quick_sort(&a);
+*///		quick_sort(&a);
 		if (a.size <= 5)
 			sort_small(&a, b_init());
 		else
 			radix_sort(&a, b_init());
 
-		printf("stack a:\n");
+/*		printf("stack a:\n");
 		printlst(a.head);
-	/*--------------TEST ZONE------------------*/
+*/	/*--------------TEST ZONE------------------*/
 
 	}
 	ft_lstclear(&a.head, del);
