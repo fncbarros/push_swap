@@ -12,11 +12,11 @@
 
 #include "../inc/push_swap.h"
 
-void	swap(t_lst **lst)
+void	swap(t_dlist **lst)
 /*swaps upper 2 elements of stack*/
 {
-	t_lst	*tmp;
-	t_lst	*tmp2;
+	t_dlist	*tmp;
+	t_dlist	*tmp2;
 
 	tmp = NULL;
 	if ((*lst)->next->next != NULL)

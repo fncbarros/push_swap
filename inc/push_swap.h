@@ -26,13 +26,6 @@ typedef struct s_stack
 	ssize_t	size;
 }				t_stack;
 
-typedef struct s_dlist
-{
-	int				n;
-	struct s_nlist	*up;
-	struct s_nlist	*low;
-}				t_dlist;
-
 /*just to save me from the pain of having to write the whole eff'n thing
 Can't use it tho :(
 # define L_ELEMENT(x) *(int *)x->content

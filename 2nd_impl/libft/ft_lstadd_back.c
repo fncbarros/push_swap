@@ -6,15 +6,15 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 10:44:24 by fbarros           #+#    #+#             */
-/*   Updated: 2021/07/12 15:40:02 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/03/09 17:18:48 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_lst **lst, t_lst *new)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_lst	*last;
+	t_list	*last;
 
 	if (!new || !lst)
 		return ;
@@ -24,8 +24,7 @@ void	ft_lstadd_back(t_lst **lst, t_lst *new)
 	{
 		last = ft_lstlast(*lst);
 		last->next = new;
-		new->prev = last;
 	}
 	else
-	*lst = new;
+		*lst = new;
 }

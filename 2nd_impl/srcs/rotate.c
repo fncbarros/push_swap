@@ -12,12 +12,12 @@
 
 #include "../inc/push_swap.h"
 
-void	rotate(t_lst **lst, char r)
+void	rotate(t_dlist **lst, char r)
 {
-	t_lst	*first;
-	t_lst	*last;
+	t_dlist	*first;
+	t_dlist	*last;
 
-	last = ft_lstlast(*lst);
+	last = lstlast(*lst);
 	first = *lst; //pointing to first element
 	if (r != 'r')
 	{

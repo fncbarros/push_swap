@@ -6,7 +6,7 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 12:56:18 by fbarros           #+#    #+#             */
-/*   Updated: 2021/07/12 15:46:34 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/05/16 12:33:59 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,23 @@ void			ft_putstr_fd(char *s, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
 
-typedef struct 			s_lst
+typedef struct s_list
 {
-	int		num;
-	struct s_lst	*next;
-	struct s_lst	*prev;
-}				t_lst;
+	void			*content;
+	struct s_list	*next;
+}				t_list;
 
-t_lst			*ft_lstnew(int num);
-void			ft_lstadd_front(t_lst **lst, t_lst *new);
-int			ft_lstsize(t_lst *lst);
-t_lst			*ft_lstlast(t_lst *lst);
-void			ft_lstadd_back(t_lst **lst, t_lst *new);
-void			ft_lstdelone(t_lst *lst/*, void (*del)(void*)*/);
-void			ft_lstclear(t_lst **lst/*, void (*del)(void *)*/);
-void			ft_lstiter(t_lst *lst, void (*f)(int));
-t_lst			*ft_lstmap(t_lst *lst,
-				int (*f)(int)/*, void (*del)(void *)*/);
-
-int			ft_isspace(int c);
+t_list			*ft_lstnew(void *content);
+void			ft_lstadd_front(t_list **lst, t_list *new);
+int				ft_lstsize(t_list *lst);
+t_list			*ft_lstlast(t_list *lst);
+void			ft_lstadd_back(t_list **lst, t_list *new);
+void			ft_lstdelone(t_list *lst, void (*del)(void*));
+void			ft_lstclear(t_list **lst, void (*del)(void *));
+void			ft_lstiter(t_list *lst, void (*f)(void *));
+t_list			*ft_lstmap(t_list *lst,
+					void *(*f)(void *), void (*del)(void *));
+int				ft_isspace(int c);
 size_t			ft_numlen(int i);
 char			*ft_strset(const char *s, char *set);
 

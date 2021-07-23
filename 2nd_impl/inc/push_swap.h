@@ -6,7 +6,7 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 09:05:21 by fbarros           #+#    #+#             */
-/*   Updated: 2021/07/12 15:55:14 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/07/23 10:08:15 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,41 @@
 # define PUSH_SWAP_H
 
 # include "libft.h"
-# include <limits.h> /*INT_MAX INT_MIN*/
 
-
-/*-------->(2 stacks in 1 struct maybe not good idea)<-------*/
-typedef struct	s_stack
+typedef struct s_dlist
 {
-	t_lst	*a;
-	t_lst	*b;
-	ssize_t	alen;
-	ssize_t	blen;
+	void			*content;
+	struct s_dlist	*prev;
+	struct s_dlist	*next;
+}				t_dlist;
+
+typedef struct s_stack
+{
+	t_dlist	*head;
+	ssize_t	size;
 }				t_stack;
 
-/*not using for now*/
-typedef struct	s_dlist
-{
-	int		num;
-	struct s_nlist	*up;
-	struct s_nlist	*low;
-}		t_dlist;
+/*-----REMOVE------*/
+#include <stdio.h>
+void printlst(t_dlist *tmp);
+/*-----REMOVE------*/
 
 void	display_err(void);
-void	push(t_stack *s, char c);
-int		search(t_stack s, char c);
-void	swap(t_lst **lst);
-void	rotate(t_lst **lst, char r);
-void	exec(char *arg, t_stack *s);
-void	quick_sort(t_stack *a);
+t_stack	*b_init(void);
+void	push(t_stack *src, t_stack *dst);
+int		search(t_stack s);
+void	swap(t_dlist **lst);
+void	rotate(t_dlist **lst, char r);
+void	exec(char *arg, t_stack *a, t_stack *b);
+
+t_dlist	*lstnew(void *content);
+t_dlist	*lstlast(t_dlist *lst);
+void	lstdelone(t_dlist *lst, void (*del)(void *));
+void	lstclear(t_dlist **lst, void (*del)(void *));
+void	lstadd_front(t_dlist **lst, t_dlist *new_elmt);
+
+void	sort_small(t_stack *a, t_stack *b);
+void	quick_sort(t_stack *a, t_stack *b);
+void	radix_sort(t_stack *a, t_stack *b);
 
 #endif

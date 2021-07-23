@@ -6,59 +6,46 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 13:19:55 by fbarros           #+#    #+#             */
-/*   Updated: 2021/07/12 16:27:53 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/06/11 16:04:19 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
-#include <stdio.h>
-
-/*DEREFERENCE elements using *(int *)a.head->content */
 
 /*---------------temporary-----------------*/
 static void check(t_stack s)
 {
-	if (search(s, 'a'))
+	if (search(s))
 		printf("ordered");
 	else
 		printf("unordered");
 }
 
-static void printlst(t_lst *tmp)
+/*static*/ void printlst(t_dlist *tmp)
 {
 	printf("--------\n");
+	if (!tmp)
+	{
+		printf("Empty!\n");
+		return ;
+	}
 	while (tmp)
 	{
-		printf("%d\n", tmp->num);
+		printf("%d\n", *(int *)tmp->content);
 		tmp = tmp->next;
 	}
 	printf("--------\n");
 }
 /*---------------temporary-----------------*/
 
-static int	num_check(char *arg)
-{
-	int 	i;
-	int 	j;
-	long	n;
 
-	i = -1;
-	n = ft_atoi(arg);
-	j = i;
-	if (n > INT_MAX || n < INT_MIN)
-		display_err();
-	return ;
-}
-
-static int	*arg_check(char **arg, int count)
-/*MAX_INT MIN_INT ...:<-----------------------<limits.h>*/
+static int	arg_check(char **arg)
+/*MAX_INT MIN_INT ...:<-----------------------------*/
 {
 	int i;
 	int j;
-	int n[count];
-	int	k;
 
-	i = 1;
+	i = 0;
 	while (arg[i])
 	{
 		j = -1;
@@ -67,62 +54,87 @@ static int	*arg_check(char **arg, int count)
 		while (arg[i][++j])
 		{
 			if (!ft_isdigit(arg[i][j]))
-				return (NULL);
-			n[i - 1] = num_check(arg[i]);
-			k = -1;
-			while (++k < (i - 1))
-			{
-				if (n[i - 1] == n[k])
-					display_err();
-			}
+				return (0);
 		}
 		i++;
 	}
-	return (n);
+	return (1);
 }
 
-/*static void	del(void *content)
+static int	num_check(int *n, int len)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (++i < len)
+	{
+		j = i;
+		while (++j < len)
+		{
+			if (n[i] == n[j])
+				return (0);
+		}
+	}
+	return (1);
+}
+
+static void	del(void *content)
 {
 	if (!content)
 		return ;
 	content = NULL;
-}*/
+}
 
 int	main(int argc, char **argv)
 {
-	int	*n;
-	t_stack	s;
-	int	i;
+	int		n[argc - 1];
+	t_stack	a;
+	int		i;
 
-	s.a = NULL;
-	s.b = NULL;
-	n = arg_check(argv + 1, argc - 1);
-	if (argc < 3 || !n || )
+	if (!arg_check(argv + 1)) /*IF $ARG used argc == 1*/
 		display_err();
 	i = 0;
-	s.alen = argc - 1;
 	while (++i < argc)
-		ft_lstadd_front(&s.a, ft_lstnew(n[i]));
-	i--;
-	if (!s.a)
+		n[i - 1] = ft_atoi(argv[i]);
+	if(!num_check(n, argc - 1))
 		display_err();
-	/*--test zone--*/
+	a.head = NULL;
+	a.size = argc - 1;
+	i--;
+	while (i--)
+		lstadd_front(&a.head, lstnew(&n[i]));
+	if (!a.head)
+		display_err();
+	if (!search(a)) // <--------------malloc'ing the whole list just to check if ordered not clever. ---> Check beforehand <---
+	{
+		/*--------------TEST ZONE------------------*/
+		printf("stack a:\n");
+		printlst(a.head);
+//		quick_sort(&a);
+//		if (a.size <= 5)
+//			sort_small(&a, b_init());
+//		else
+//			radix_sort(&a, b_init());
+		printf("reverse stack a:\n");
+//		printlst(a.head);
+//		PRINT REVERSE <-----------------------------------
+			printf("--------\n");
+		t_dlist *tmp;
+		tmp = lstlast(a.head);
+		if (!tmp)
+		{
+			printf("Empty!\n");
+		}
+		while (tmp)
+		{
+			printf("%d\n", *(int *)tmp->content);
+			tmp = tmp->prev;
+		}
+		printf("--------\n");
+	/*--------------TEST ZONE------------------*/
 
-	printlst(s.a);
-	exec("pb", &s);
-	exec("pb", &s);
-	printlst(s.a);
-	printlst(s.b);
-	exec("ra", &s);
-	exec("rb", &s);
-	printlst(s.a);
-	printlst(s.b);
-
-	check(s);
-
-	/*--test zone--*/
-
-//	ft_lstclear(&s.a, del);
-	free(n);
+	}
+	lstclear(&a.head, del);
 	return (0);
 }
