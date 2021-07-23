@@ -12,16 +12,18 @@
 
 #include "../inc/push_swap.h"
 
-void	rotate(t_list **lst, char r)
+void	rotate(t_stack *stack, char r)
 {
 	t_list	*first;
 	t_list	*last;
 
-	last = ft_lstlast(*lst);
-	first = *lst; //pointing to first element
+	if (stack->size < 3)
+		return ;
+	last = ft_lstlast(stack->head);
+	first = stack->head;
 	if (r != 'r')
 	{
-		*lst = (*lst)->next;
+		stack->head = stack->head->next;
 		first->next = NULL;
 		last->next = first;
 	}
@@ -30,7 +32,7 @@ void	rotate(t_list **lst, char r)
 		while (first->next != last)
 			first = first->next;
 		first->next = NULL;
-		last->next = *lst;
-		*lst = last;
+		last->next = stack->head;
+		stack->head = last;
 	}
 }

@@ -12,11 +12,14 @@
 
 #include "../inc/push_swap.h"
 
-void	rotate(t_dlist **lst, char r)
+void	rotate(t_dlist **lst, char r, char *arg)
+/*NOT WORKING W/ 2 ELEMENTS ONLY*/
 {
 	t_dlist	*first;
 	t_dlist	*last;
 
+	if (!(*lst)->next || !(*lst))
+		return ;
 	last = lstlast(*lst);
 	first = *lst; //pointing to first element
 	if (r != 'r')
@@ -33,4 +36,5 @@ void	rotate(t_dlist **lst, char r)
 		last->next = *lst;
 		*lst = last;
 	}
+	ft_putstr_fd(arg, 1);
 }

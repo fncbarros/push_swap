@@ -36,7 +36,7 @@ t_stack	*b_init(void);
 void	push(t_stack *src, t_stack *dst);
 int		search(t_stack s);
 void	swap(t_list **lst);
-void	rotate(t_list **lst, char r);
+void	rotate(t_stack *stack, char r);
 void	exec(char *arg, t_stack *a, t_stack *b);
 
 void	sort_small(t_stack *a, t_stack *b);

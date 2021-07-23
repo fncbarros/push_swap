@@ -34,11 +34,11 @@ void printlst(t_dlist *tmp);
 /*-----REMOVE------*/
 
 void	display_err(void);
-t_stack	*b_init(void);
-void	push(t_stack *src, t_stack *dst);
+t_stack	b_init(void);
+void	push(t_stack *src, t_stack *dst, char *arg);
 int		search(t_stack s);
-void	swap(t_dlist **lst);
-void	rotate(t_dlist **lst, char r);
+void	swap(t_dlist **lst, char *arg);
+void	rotate(t_dlist **lst, char r, char *arg);
 void	exec(char *arg, t_stack *a, t_stack *b);
 
 t_dlist	*lstnew(void *content);

@@ -19,15 +19,12 @@ void	display_err(void)
 	exit(1);
 }
 
-t_stack	*b_init(void)
+t_stack	b_init(void)
 {
-	t_stack	*b;
+	t_stack	b;
 
-	b = (t_stack *)malloc(sizeof(t_stack));
-	b->head->next = NULL;
-	b->head->prev = NULL;
-	b->head = NULL;
-	b->size = 0;
+	b.head = lstnew(NULL);
+	b.size = 0;
 	return (b);
 }
 

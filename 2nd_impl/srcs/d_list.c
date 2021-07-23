@@ -5,7 +5,7 @@ t_dlist	*lstnew(void *content)
 	t_dlist	*lst;
 
 	lst = NULL;
-	lst = malloc(sizeof(lst));
+	lst = (t_dlist *)malloc(sizeof(t_dlist));
 	if (!lst)
 		return (NULL);
 	lst->next = NULL;
@@ -27,7 +27,12 @@ void	lstadd_front(t_dlist **lst, t_dlist *new_elmt)
 {
 	t_dlist	*tmp;
 
-	if (new_elmt != NULL || lst != NULL)
+	if (!(*lst))
+	{
+		*lst = tmp;
+		return ;
+	}
+	if (new_elmt != NULL)
 	{
 		tmp = *lst;
 		(*new_elmt).next = *lst;

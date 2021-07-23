@@ -113,9 +113,9 @@ int	main(int argc, char **argv)
 		printlst(a.head);
 //		quick_sort(&a);
 //		if (a.size <= 5)
-			sort_small(&a, b_init());
+//			sort_small(&a, b_init());
 //		else
-//			radix_sort(&a, b_init());
+			radix_sort(&a, b_init());
 		printf("stack a:\n");
 		printlst(a.head);
 	/*--------------TEST ZONE------------------*/

@@ -116,9 +116,24 @@ int	main(int argc, char **argv)
 //			sort_small(&a, b_init());
 //		else
 //			radix_sort(&a, b_init());
-		printf("reverse stack a:\n");
 //		printlst(a.head);
-//		PRINT REVERSE <-----------------------------------
+		t_stack b = b_init();
+		exec("pb", &a, &b);
+		exec("pb", &a, &b);
+		exec("ra", &a, &b);
+		printf("stack b:\n");
+		printlst(b.head);
+		exec("rra", &a, &b);
+
+		printf("stack b:\n");
+		printlst(b.head);
+		printf("stack a:\n");
+		printlst(a.head);
+
+
+
+//		PRINT REVERSE <-------------
+/*		printf("reverse stack a:\n");
 			printf("--------\n");
 		t_dlist *tmp;
 		tmp = lstlast(a.head);
@@ -132,7 +147,8 @@ int	main(int argc, char **argv)
 			tmp = tmp->prev;
 		}
 		printf("--------\n");
-	/*--------------TEST ZONE------------------*/
+
+*/	/*--------------TEST ZONE------------------*/
 
 	}
 	lstclear(&a.head, del);

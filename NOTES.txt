@@ -1,6 +1,10 @@
 push_swap Log
 
 pa = push(b, a) pb = push(a, b)
+push -> if no src abort <------------------------------
+rotate -> if no src abort <------------------------------
+
+
 
 /*DEREFERENCE elements using *(int *)a.head->content */
 *(int *)ft_lstlast(a->head)->content WORKS!!
