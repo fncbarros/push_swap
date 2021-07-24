@@ -18,7 +18,7 @@ static int	chunk_sort(t_stack *s, int *i, int *j, int min, int max)
 
 	while ((*i)++ != (int)(s->size / 2) && s->head)
 	{
-		if (*(int *)s->head->content >= min && *(int *)s->head->content < max)
+		if (s->head->n >= min && s->head->n < max)
 			break ;
 		s->head = s->head->next;
 	}
@@ -29,7 +29,7 @@ static int	chunk_sort(t_stack *s, int *i, int *j, int min, int max)
 	*j = 0;
 	while (s->head)
 	{
-		if (*(int *)s->head->content >= min && *(int *)s->head->content < max)
+		if (s->head->n >= min && s->head->n < max)
 			*j = tmp;
 		s->head = s->head->next;
 		tmp++;

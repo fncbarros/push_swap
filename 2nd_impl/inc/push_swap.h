@@ -17,7 +17,7 @@
 
 typedef struct s_dlist
 {
-	void			*content;
+	int				n;
 	struct s_dlist	*prev;
 	struct s_dlist	*next;
 }				t_dlist;
@@ -34,17 +34,17 @@ void printlst(t_dlist *tmp);
 /*-----REMOVE------*/
 
 void	display_err(void);
-t_stack	b_init(void);
+t_stack	*b_init(void);
 void	push(t_stack *src, t_stack *dst, char *arg);
 int		search(t_stack s);
 void	swap(t_dlist **lst, char *arg);
 void	rotate(t_dlist **lst, char r, char *arg);
 void	exec(char *arg, t_stack *a, t_stack *b);
 
-t_dlist	*lstnew(void *content);
+t_dlist	*lstnew(int content);
 t_dlist	*lstlast(t_dlist *lst);
-void	lstdelone(t_dlist *lst, void (*del)(void *));
-void	lstclear(t_dlist **lst, void (*del)(void *));
+//void	lstdelone(t_dlist *lst, void (*del)(int)); //may be useless
+void	lstclear(t_dlist **lst/*, void (*del)(int)*/); //may be useless
 void	lstadd_front(t_dlist **lst, t_dlist *new_elmt);
 
 void	sort_small(t_stack *a, t_stack *b);

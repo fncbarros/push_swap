@@ -31,7 +31,8 @@ static void check(t_stack s)
 	}
 	while (tmp)
 	{
-		printf("%d\n", *(int *)tmp->content);
+//		printf("%d\n", *(int *)tmp->content);
+		printf("%d\n", tmp->n);
 		tmp = tmp->next;
 	}
 	printf("--------\n");
@@ -53,6 +54,8 @@ static int	arg_check(char **arg)
 			j++;
 		while (arg[i][++j])
 		{
+			if (ft_isspace(arg[i][j]))
+				continue ;
 			if (!ft_isdigit(arg[i][j]))
 				return (0);
 		}
@@ -66,7 +69,7 @@ static int	num_check(int *n, int len)
 	int i;
 	int j;
 
-	i = -1;
+	i = 0;
 	while (++i < len)
 	{
 		j = i;
@@ -79,33 +82,29 @@ static int	num_check(int *n, int len)
 	return (1);
 }
 
-static void	del(void *content)
-{
-	if (!content)
-		return ;
-	content = NULL;
-}
-
 int	main(int argc, char **argv)
 {
 	int		n[argc - 1];
 	t_stack	a;
 	int		i;
 
-	if (!arg_check(argv + 1)) /*IF $ARG used argc == 1*/
+	if (!arg_check(argv + 1))
 		display_err();
 	i = 0;
-	while (++i < argc)
+	while (++i < argc) /*IF $ARG used argc == 1 ---> strsplit*/
 		n[i - 1] = ft_atoi(argv[i]);
 	if(!num_check(n, argc - 1))
 		display_err();
 	a.head = NULL;
 	a.size = argc - 1;
 	i--;
-	while (i--)
-		lstadd_front(&a.head, lstnew(&n[i]));
-	if (!a.head)
-		display_err();
+	while (i-- > 0)
+	{
+		lstadd_front(&a.head, lstnew(n[i]));
+		if (!a.head)
+			display_err();
+	}
+	check(a);
 	if (!search(a)) // <--------------malloc'ing the whole list just to check if ordered not clever. ---> Check beforehand <---
 	{
 		/*--------------TEST ZONE------------------*/
@@ -113,11 +112,11 @@ int	main(int argc, char **argv)
 		printlst(a.head);
 //		quick_sort(&a);
 //		if (a.size <= 5)
-//			sort_small(&a, b_init());
+			sort_small(&a, b_init());
 //		else
 //			radix_sort(&a, b_init());
 //		printlst(a.head);
-		t_stack b = b_init();
+/*		t_stack b = b_init();
 		exec("pb", &a, &b);
 		exec("pb", &a, &b);
 		exec("ra", &a, &b);
@@ -127,7 +126,7 @@ int	main(int argc, char **argv)
 
 		printf("stack b:\n");
 		printlst(b.head);
-		printf("stack a:\n");
+*/		printf("stack a:\n");
 		printlst(a.head);
 
 
@@ -143,14 +142,14 @@ int	main(int argc, char **argv)
 		}
 		while (tmp)
 		{
-			printf("%d\n", *(int *)tmp->content);
+			printf("%d\n", tmp->n);
 			tmp = tmp->prev;
 		}
 		printf("--------\n");
-
-*/	/*--------------TEST ZONE------------------*/
+*/
+	/*--------------TEST ZONE------------------*/
 
 	}
-	lstclear(&a.head, del);
+	lstclear(&a.head);
 	return (0);
 }

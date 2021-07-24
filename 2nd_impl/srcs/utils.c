@@ -19,12 +19,13 @@ void	display_err(void)
 	exit(1);
 }
 
-t_stack	b_init(void)
+t_stack	*b_init(void)
+//number == 0 by default...... :( <------------------
 {
-	t_stack	b;
+	t_stack	*b;
 
-	b.head = lstnew(NULL);
-	b.size = 0;
+	b = (void *)malloc(sizeof(t_stack)); //is this really necessary tho?
+	b->size = 0;
 	return (b);
 }
 
@@ -37,9 +38,11 @@ int	search(t_stack s)
 {
 	ssize_t	i;
 
+	if (!s.head)
+		return (0);
 	i = 1;
 	while (s.head->next &&
-		*(int *)s.head->content < *(int *)s.head->next->content)
+		s.head->n < s.head->next->n)
 	{
 		s.head = s.head->next;
 		i++;

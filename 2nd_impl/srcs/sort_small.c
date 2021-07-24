@@ -24,7 +24,7 @@ static void	find_smallest(t_stack *a)
 	while (tmp2->next)
 	{
 		tmp2 = tmp2->next;
-		if (*(int *)tmp->content > *(int *)tmp2->content)
+		if (tmp->n > tmp2->n)
 		{
 			tmp = tmp2;
 			i++;
@@ -51,13 +51,13 @@ void	sort_small(t_stack *a, t_stack *b)
 	}
 	while (!search(*a) || b->size)
 	{
-		top = *(int *)a->head->content;
-		bottom = *(int *)lstlast(a->head)->content;
+		top = a->head->n;
+		bottom = lstlast(a->head)->n;
 		if (top > bottom)
 			exec("ra", a, 0);
-		else if (top > *(int *)a->head->next->content)
+		else if (top > a->head->next->n)
 			exec("sa", a, 0);
-		else if (*(int *)a->head->next->content > bottom)
+		else if (a->head->next->n > bottom)
 			exec("rra", a, 0);
 		if (b->size && search(*a))
 			exec("pa", a, b);
