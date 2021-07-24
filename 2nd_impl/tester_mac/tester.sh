@@ -8,7 +8,7 @@ CYAN='\033[0;93m'
 LIGHT_BLUE='\033[0;94m'
 NC='\033[0m'
 
-make -C ../
+make -C ..
 
 clear
 
