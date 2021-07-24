@@ -25,7 +25,7 @@ typedef struct s_dlist
 typedef struct s_stack
 {
 	t_dlist	*head;
-	ssize_t	size;
+	ssize_t	size;	//ssize_t
 }				t_stack;
 
 /*-----REMOVE------*/

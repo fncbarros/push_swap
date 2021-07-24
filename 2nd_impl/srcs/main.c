@@ -6,15 +6,14 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 13:19:55 by fbarros           #+#    #+#             */
-/*   Updated: 2021/06/11 16:04:19 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/07/24 15:35:21 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
 /*---------------TEMPORARY-----------------*/
-
-/*static*/ void printlst(t_dlist *tmp)
+void printlst(t_dlist *tmp)
 {
 	printf("--------\n");
 	if (!tmp)
@@ -30,7 +29,6 @@
 	printf("--------\n");
 }
 /*---------------TEMPORARY-----------------*/
-
 
 static int	arg_check(char **arg)
 /*MAX_INT MIN_INT ...:<-----------------------------*/
@@ -125,45 +123,15 @@ int	main(int argc, char **argv)
 	if (!search(a) && a.size) // <--------------malloc'ing the whole list just to check if ordered not clever. ---> Check beforehand <---
 	{
 		/*--------------TEST ZONE------------------*/
-/*		printf("stack a:\n");
-		printlst(a.head);*/
-//		quick_sort(&a);
-//		if (a.size <= 5)
-			sort_small(&a, b_init());
-//		else
-//			radix_sort(&a, b_init());
-//		printlst(a.head);
-/*		t_stack b = b_init();
-		exec("pb", &a, &b);
-		exec("pb", &a, &b);
-		exec("ra", &a, &b);
-		printf("stack b:\n");
-		printlst(b.head);
-		exec("rra", &a, &b);
-
-		printf("stack b:\n");
-		printlst(b.head);
-*/	/*	printf("stack a:\n");
+		printf("stack a:\n");
 		printlst(a.head);
-*/
-
-
-//		PRINT REVERSE <-------------
-/*		printf("reverse stack a:\n");
-			printf("--------\n");
-		t_dlist *tmp;
-		tmp = lstlast(a.head);
-		if (!tmp)
-		{
-			printf("Empty!\n");
-		}
-		while (tmp)
-		{
-			printf("%d\n", tmp->n);
-			tmp = tmp->prev;
-		}
-		printf("--------\n");
-*/
+//		quick_sort(&a);
+/*		if (a.size <= 5)
+			sort_small(&a, b_init());
+		else*/
+			radix_sort(&a, b_init());
+		printf("stack a:\n");
+		printlst(a.head);
 	/*--------------TEST ZONE------------------*/
 
 	}
