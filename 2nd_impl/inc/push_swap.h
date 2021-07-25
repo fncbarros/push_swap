@@ -25,7 +25,7 @@ typedef struct s_dlist
 typedef struct s_stack
 {
 	t_dlist	*head;
-	ssize_t	size;	//ssize_t
+	int		size;	//ssize_t
 }				t_stack;
 
 /*-----REMOVE------*/
@@ -40,6 +40,7 @@ int		search(t_stack s);
 void	swap(t_dlist **lst, char *arg);
 void	rotate(t_dlist **lst, char r, char *arg);
 void	exec(char *arg, t_stack *a, t_stack *b);
+int		find_closest(t_stack *a, int condition);
 
 t_dlist	*lstnew(int content);
 t_dlist	*lstlast(t_dlist *lst);
