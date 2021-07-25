@@ -12,7 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-void	push(t_stack *src, t_stack *dst, char *arg)
+void	push(t_stack *src, t_stack *dst)
 /*
  * Pushes src to dst
  *Add node to list pointed by stack's head s
@@ -33,5 +33,4 @@ void	push(t_stack *src, t_stack *dst, char *arg)
 		lstadd_front(&dst->head, tmp);
 	dst->size++;
 	src->size--;
-	ft_putstr_fd(arg, 1);	
 }

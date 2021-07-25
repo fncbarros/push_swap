@@ -55,35 +55,19 @@ static t_dlist	*get_middle(t_stack a)
 	return (tmp);
 }
 
-int ft_rotate(t_stack *a, t_stack top, t_stack bottom)
+int ft_rotate(t_stack *a, int rot, char *dir)
+/*rotates a rot times in dir direction
+	does nothing and returns 1 if rot is -1
+only working for stack a atm; not very versatile*/
 {
-	ssize_t	rot;
-	char 	*dir;
-
-	dir = "rra";
-	rot = bottom.size;
-	if (top.size >= ((a->size / 2) - 1) && bottom.size >= (a->size / 2))
+	if (rot == -1)
 		return (1);
-	if (top.size == (bottom.size - 1))
-	/*if top == bottom choose smallest btween upper and lower*/
-	{
-		if (top.head->n < bottom.head->n)
-		{
-			dir = "ra";
-			rot = top.size;
-		}
-	}
-	else if (top.size < bottom.size)
-	{
-		dir = "ra";
-		rot = top.size - 1;
-	}
-	while (rot-- > 0)
+	while (rot--)
 		exec(dir, a, 0);
 	return (0);
 }
 
-int	find_closest(t_stack *a, int	condition) 
+int	find_closest(t_stack *a, int mod, int dec) 
 /*finds looked for element closest to extremes(top/bottom) and brings it to top
 returns -1 if none found*/
 {
@@ -97,7 +81,7 @@ returns -1 if none found*/
 	bottom.size = 0;
 	while (top.head && top.size++ < (a->size / 2))
 	{
-		if (top.head->n == condition)
+		if ((top.head->n / mod) % 10 == dec)
 			break ; 
 		top.head = top.head->next;
 	}
@@ -106,15 +90,15 @@ returns -1 if none found*/
 	while (bottom.head && bottom.size <= (a->size / 2))
 	{
 		bottom.size++;
-		if (bottom.head->n == condition && bottom.size < top.size)
-			return (bottom.size); //return (rotate function)
+		if ((bottom.head->n / mod) % 10 == dec && bottom.size < top.size)
+			return (ft_rotate(a, bottom.size, "rra"));
 		bottom.head = bottom.head->prev;
 	}
-	if (top.size > (a->size / 2) && top.head->n != condition)
+	if (top.size > (a->size / 2) && (top.head->n / mod) % 10 != dec)
 		top.size = 0;		
 	/*if tmp.size > i: tmp.size = i*/
-	printf("\ntop = %d\tbottom = %d\t", top.size, bottom.size);
-	return (--top.size); //return (rotate function)
+//	printf("\ntop = %d\tbottom = %d\t", top.size, bottom.size);
+	return (ft_rotate(a, --top.size, "ra"));
 /*return (ft_rotate(a, top, bottom));*/
 }
 

@@ -35,12 +35,12 @@ void printlst(t_dlist *tmp);
 
 void	display_err(void);
 t_stack	*b_init(void);
-void	push(t_stack *src, t_stack *dst, char *arg);
+void	push(t_stack *src, t_stack *dst);
 int		search(t_stack s);
-void	swap(t_dlist **lst, char *arg);
-void	rotate(t_dlist **lst, char r, char *arg);
+void	swap(t_dlist **lst);
+void	rotate(t_dlist **lst, char r);
 void	exec(char *arg, t_stack *a, t_stack *b);
-int		find_closest(t_stack *a, int condition);
+int		find_closest(t_stack *a, int mod, int dec);
 
 t_dlist	*lstnew(int content);
 t_dlist	*lstlast(t_dlist *lst);

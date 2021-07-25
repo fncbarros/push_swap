@@ -62,5 +62,4 @@ void	sort_small(t_stack *a, t_stack *b)
 		if (b->size && search(*a))
 			exec("pa", a, b);
 	}
-	free(b);
 }

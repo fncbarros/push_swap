@@ -12,7 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-void	swap(t_dlist **lst, char *arg)
+void	swap(t_dlist **lst)
 /*swaps upper 2 elements of stack*/
 {
 	t_dlist	*tmp;
@@ -25,5 +25,4 @@ void	swap(t_dlist **lst, char *arg)
 	*lst = (*lst)->next;
 	tmp2->next = tmp;
 	(*lst)->next = tmp2;
-	ft_putstr_fd(arg, 1);
 }

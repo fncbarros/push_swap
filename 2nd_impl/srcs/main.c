@@ -104,8 +104,8 @@ int	main(int argc, char **argv)
 {
 	int		n[argc - 1];
 	t_stack	a;
+	t_stack	b;
 	int		i;
-	int		j;
 
 
 	if (!arg_check(argv + 1))
@@ -120,17 +120,18 @@ int	main(int argc, char **argv)
 		if (!a.head)
 			display_err();
 	}
-	if (!search(a) && a.size) // <--------------malloc'ing the whole list just to check if ordered not clever. ---> Check beforehand <---
+	if (/*!search(a) &&*/ a.size) // <--------------malloc'ing the whole list just to check if ordered not clever. ---> Check beforehand <---
 	{
 		/*--------------TEST ZONE------------------*/
 		printf("stack a:\n");
 		printlst(a.head);
+//		printf("closest = %d\n", find_closest(&a, 0));
 //		quick_sort(&a);
-/*		if (a.size <= 5)
-			sort_small(&a, b_init());
-		else*/
-			radix_sort(&a, b_init());
-		printf("stack a:\n");
+//		if (a.size <= 5)
+			sort_small(&a, &b);
+/*		else
+		radix_sort(&a, &b);
+*/		printf("stack a:\n");
 		printlst(a.head);
 	/*--------------TEST ZONE------------------*/
 
