@@ -12,8 +12,6 @@
 
 #include "../inc/push_swap.h"
 
-
-
 void	radix_sort(t_stack *a, t_stack *b)
 {
 	int	mod;
@@ -25,22 +23,20 @@ void	radix_sort(t_stack *a, t_stack *b)
 	return ;
 */	while(!search(*a) || b->size)
 	{
-		dec = 1;
-		while (dec < 9 && a->size) //do not want to empty stack_a entirely <-------
+		dec = 9;
+		while (dec > 9 && a->size) //do not want to empty stack_a entirely <-------
 		{
-			if (a->head->n % mod == dec)
+			dec -= find_closest(a, mod, dec);
+			if ((a->head->n / mod) % 10 == dec)
 				exec("pb", a, b);
-			dec += find_closest(a, mod, dec);		
-			while (b->size)
-				exec("pa", a, b);
-		}
-
-		break ;
-		if (mod > 100)
-			break ;
+		}			
+		while (b->size)
+			exec("pa", a, b);
+//		if (mod == 10)
+//			break ;
 		mod *= 10;
 	}
-	printf("stack b:\n");
+/*	printf("stack b:\n");
 	printlst(b->head);
-	lstclear(&b->head);
+	lstclear(&b->head);*/
 }

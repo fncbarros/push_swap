@@ -43,6 +43,8 @@ int	search(t_stack s)
 }
 
 static t_dlist	*get_middle(t_stack a)
+/*finds midpoint in stack if odd or end of upper half if even
+	not really useful atm*/
 {
 	t_dlist	*tmp;
 	int		i;
@@ -85,7 +87,6 @@ returns -1 if none found*/
 			break ; 
 		top.head = top.head->next;
 	}
-
 	bottom.head = lstlast(top.head);
 	while (bottom.head && bottom.size <= (a->size / 2))
 	{
