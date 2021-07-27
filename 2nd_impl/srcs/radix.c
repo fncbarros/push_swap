@@ -29,11 +29,11 @@ void	radix_sort(t_stack *a, t_stack *b)
 			dec -= find_closest(a, mod, dec);
 			if ((a->head->n / mod) % 10 == dec)
 				exec("pb", a, b);
-		}			
+		}
 		while (b->size)
 			exec("pa", a, b);
-//		if (mod == 10)
-//			break ;
+		if (mod == 10)
+			break ;
 		mod *= 10;
 	}
 /*	printf("stack b:\n");

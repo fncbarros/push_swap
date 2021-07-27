@@ -23,18 +23,19 @@ t_dlist	*lstlast(t_dlist *lst)
 	return (lst);
 }
 
-void	lstadd_front(t_dlist **lst, t_dlist *new_elmt)
+void	lstadd_front(t_stack *s, t_dlist *new_elmt)
 {
-	if (!(*lst))
+	if (!s->head)
 	{
-		*lst = new_elmt;
+		s->head = new_elmt;
+		s->last = new_elmt;
 		return ;
 	}
 	if (new_elmt != NULL)
 	{
-		(*new_elmt).next = *lst;
-		(*lst)->prev = new_elmt;
-		*lst = new_elmt;
+		(*new_elmt).next = s->head;
+		s->head->prev = new_elmt;
+		s->head = new_elmt;
 	}
 }
 /*

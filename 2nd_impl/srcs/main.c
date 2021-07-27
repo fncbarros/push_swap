@@ -72,6 +72,8 @@ static int	num_check(int *n, int len)
 	return (1);
 }
 
+//static void	get_index()
+
 static void	get_nums(char **argv, t_stack *a, int *n, int argc)
 {
 	a->size = 0;
@@ -107,16 +109,15 @@ int	main(int argc, char **argv)
 	t_stack	b;
 	int		i;
 
-
 	if (!arg_check(argv + 1))
 		display_err();	
-	get_nums(argv, &a, n, argc);/*IF $ARG used argc == 2 ---> strsplit*/
+	get_nums(argv, &a, n, argc);
 	if(!num_check(n, a.size))
 		display_err();
 	i = a.size;
 	while (i-- > 0)
 	{
-		lstadd_front(&a.head, lstnew(n[i]));
+		lstadd_front(&a, lstnew(n[i]));
 		if (!a.head)
 			display_err();
 	}
@@ -127,10 +128,19 @@ int	main(int argc, char **argv)
 		printlst(a.head);*/
 //		printf("closest = %d\n", find_closest(&a, 0));
 //		quick_sort(&a);
-		if (a.size <= 5)
+/*		if (a.size <= 5)
 			sort_small(&a, &b);
 		else
-			radix_sort(&a, &b);
+			radix_sort(&a, &b);*/
+		printf("stack a:\n");
+		printlst(a.head);
+		printf("last: %d\n", a.last->n);
+//		exec("pb", &a, &b);
+//		printf("last b: %d\n", b.last->n);
+		printf("head = %d, head->next = %d, head->next->next = %d, last->prev = %d, last->prev->prev = %d\n", a.head->n, a.head->next->n, a.head->next->next->n, a.last->prev->n, a.last->prev->prev->n);
+		exec("sa", &a, 0);
+		printf("head = %d, head->next = %d, head->next->next = %d, last->prev = %d, last->prev->prev = %d\n", a.head->n, a.head->next->n, a.head->next->next->n, a.last->prev->n, a.last->prev->prev->n);
+//		printf("last a: %d\tlast prev: %d\tlast next: %d\thead next: %d\thead prev: %d\n", a.last->n, a.last->prev->n, 0/*&a.last->next*/, a.head->next->n, 0/*&a.head->prev*/);
 		printf("stack a:\n");
 		printlst(a.head);
 	/*--------------TEST ZONE------------------*/

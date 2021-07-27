@@ -26,9 +26,9 @@ void	exec(char *arg, t_stack *a, t_stack *b)
 	else if (*arg == 's')
 	{
 		if (*(arg + 1) == 'a' || *(arg + 1) == 's')
-			swap(&a->head);
+			swap(a);
 		if (*(arg + 1) == 'b' || *(arg + 1) == 's')
-			swap(&b->head);
+			swap(a);
 	}
 	else if (*arg == 'r')
 	{
@@ -38,9 +38,9 @@ void	exec(char *arg, t_stack *a, t_stack *b)
 			i++;
 		}
 		if (*(arg + i) == 'a' || *(arg + i) == 'r')
-			rotate(&a->head, r);
+			rotate(a, r);
 		else if ( *(arg + i)== 'b' || *(arg + i) == 'r')
-			rotate(&b->head, r);
+			rotate(b, r);
 	}
 	ft_putstr_fd(arg, 1);
 	ft_putchar_fd('\n', 1);

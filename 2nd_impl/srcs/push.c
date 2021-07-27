@@ -28,9 +28,12 @@ void	push(t_stack *src, t_stack *dst)
 	src->head = src->head->next;
 	tmp->next = NULL;
 	if (!dst->size)
+	{
 		dst->head = tmp;
+		dst->last = tmp;
+	}
 	else
-		lstadd_front(&dst->head, tmp);
+		lstadd_front(dst, tmp);
 	dst->size++;
 	src->size--;
 }
