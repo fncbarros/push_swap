@@ -64,3 +64,8 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+2nd_impl/tester_linux/output_info.c
+2nd_impl/tester_linux/output.txt
+tester_linux/output_info.c
+tester_linux/tester.sh
+2nd_impl/tester_linux/tester.sh

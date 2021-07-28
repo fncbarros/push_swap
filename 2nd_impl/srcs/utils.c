@@ -57,7 +57,7 @@ static t_dlist	*get_middle(t_stack a)
 	return (tmp);
 }
 
-int ft_rotate(t_stack *a, int rot, char *dir)
+static int ft_rotate(t_stack *a, int rot, char *dir)
 /*rotates a rot times in dir direction
 	does nothing and returns 1 if rot is -1
 only working for stack a atm; not very versatile*/
@@ -69,7 +69,7 @@ only working for stack a atm; not very versatile*/
 	return (0);
 }
 
-int	find_closest(t_stack *a, int mod, int dec) 
+int	find_closest(t_stack *a, int mod, int dec)
 /*finds looked for element closest to extremes(top/bottom) and brings it to top
 returns -1 if none found*/
 {
@@ -84,7 +84,7 @@ returns -1 if none found*/
 	while (top.head && top.size++ < (a->size / 2))
 	{
 		if ((top.head->n / mod) % 10 == dec)
-			break ; 
+			break ;
 		top.head = top.head->next;
 	}
 	bottom.head = lstlast(top.head);
@@ -96,7 +96,7 @@ returns -1 if none found*/
 		bottom.head = bottom.head->prev;
 	}
 	if (top.size > (a->size / 2) && (top.head->n / mod) % 10 != dec)
-		top.size = 0;		
+		top.size = 0;
 	/*if tmp.size > i: tmp.size = i*/
 //	printf("\ntop = %d\tbottom = %d\t", top.size, bottom.size);
 	return (ft_rotate(a, --top.size, "ra"));
@@ -105,7 +105,7 @@ returns -1 if none found*/
 
 /* ^^^ ------------------------------------------------------------------------------ ^^^
 		maybe pass a copy of a->head to save a line (t_dlist a, int condition)
-		maybe return absolute index number instead of relative to top/bottom (0 - a.size) 
+		maybe return absolute index number instead of relative to top/bottom (0 - a.size)
 		... or call a rotating function instead
 		...or pass char rot == "ra" or "raa" depending on value returned
    ^^^ ------------------------------------------------------------------------------ ^^^	*/

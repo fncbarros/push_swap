@@ -18,6 +18,7 @@
 typedef struct s_dlist
 {
 	int				n;
+	int				index;
 	struct s_dlist	*prev;
 	struct s_dlist	*next;
 }				t_dlist;
@@ -26,7 +27,6 @@ typedef struct s_stack
 {
 	t_dlist	*head;
 	int		size;
-	int		index;
 	t_dlist	*last;
 }				t_stack;
 

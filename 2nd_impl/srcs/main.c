@@ -54,7 +54,7 @@ static int	arg_check(char **arg)
 	return (1);
 }
 
-static int	num_check(int *n, int len)
+static int	num_check(int *n, int len, int *copy)
 {
 	int i;
 	int j;
@@ -62,6 +62,7 @@ static int	num_check(int *n, int len)
 	i = -1;
 	while (++i < len)
 	{
+		copy[i] = n[i];
 		j = i;
 		while (++j < len)
 		{
@@ -69,10 +70,20 @@ static int	num_check(int *n, int len)
 				return (0);
 		}
 	}
+	sort_array(copy); //still need to build
 	return (1);
 }
 
-//static void	get_index()
+static int	get_index(int number, int *index) //swich to binary search
+/*Not yet in use*/
+{
+	int	i;
+
+	i = 1;
+	while (index[i] != number)
+		i++;
+	return (i);
+}
 
 static void	get_nums(char **argv, t_stack *a, int *n, int argc)
 {
@@ -105,14 +116,15 @@ static void	get_nums(char **argv, t_stack *a, int *n, int argc)
 int	main(int argc, char **argv)
 {
 	int		n[argc - 1];
+	int		sorted[argc - 1];
 	t_stack	a;
 	t_stack	b;
 	int		i;
 
 	if (!arg_check(argv + 1))
-		display_err();	
+		display_err();
 	get_nums(argv, &a, n, argc);
-	if(!num_check(n, a.size))
+	if(!num_check(n, a.size, sorted))
 		display_err();
 	i = a.size;
 	while (i-- > 0)
@@ -120,6 +132,7 @@ int	main(int argc, char **argv)
 		lstadd_front(&a, lstnew(n[i]));
 		if (!a.head)
 			display_err();
+		a.head->index = get_index(n[i], sorted); /*NEED SORT ARRAY <--------*/
 	}
 	if (!search(a) && a.size) // <--------------malloc'ing the whole list just to check if ordered not clever. ---> Check beforehand <---
 	{

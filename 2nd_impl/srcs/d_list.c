@@ -11,6 +11,7 @@ t_dlist	*lstnew(int content)
 	lst->next = NULL;
 	lst->prev = NULL;
 	lst->n = content;
+	lst->index = 0;
 	return (lst);
 }
 
@@ -38,17 +39,8 @@ void	lstadd_front(t_stack *s, t_dlist *new_elmt)
 		s->head = new_elmt;
 	}
 }
-/*
-void	lstdelone(t_dlist *lst, void (*del)(int))
-{
-	if (!lst || !del)
-		return ;
-	(*del)(lst->n);
-	free(lst);
-	lst = NULL;
-}
-*/
-void	lstclear(t_dlist **lst/*, void (*del)(int)*/)
+
+void	lstclear(t_dlist **lst)
 {
 	t_dlist	*tmp;
 
