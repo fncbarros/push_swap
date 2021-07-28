@@ -44,7 +44,7 @@ static int	arg_check(char **arg)
 			j++;
 		while (arg[i][++j])
 		{
-			if (ft_isspace(arg[i][j]))
+			if (ft_isspace(arg[i][j]) || arg[i][j] == '-')
 				continue ;
 			if (!ft_isdigit(arg[i][j]))
 				return (0);
@@ -54,7 +54,7 @@ static int	arg_check(char **arg)
 	return (1);
 }
 
-static int	num_check(int *n, int len, int *copy)
+static int	num_check(int *n, int len/*, int *copy*/)
 {
 	int i;
 	int j;
@@ -62,7 +62,7 @@ static int	num_check(int *n, int len, int *copy)
 	i = -1;
 	while (++i < len)
 	{
-		copy[i] = n[i];
+//		copy[i] = n[i];
 		j = i;
 		while (++j < len)
 		{
@@ -70,12 +70,13 @@ static int	num_check(int *n, int len, int *copy)
 				return (0);
 		}
 	}
-	sort_array(copy); //still need to build
+//	if (len > SHORT_LST) /*bypass in case size < 5*/
+//		copy = sort_array(n, len); //still need to build; if sorted ??
 	return (1);
 }
 
 static int	get_index(int number, int *index, int size)
-/*Not yet in use*/
+/*Binary search*/
 {
 	int	i;
 
@@ -94,21 +95,22 @@ static int	get_index(int number, int *index, int size)
 
 static void	get_nums(char **argv, t_stack *a, int *n, int argc)
 {
-	a->size = 0;
-	a->head = NULL;
+	char	**arg;
 
+	a->size = 0;
+	arg = NULL;
 	if (argc == 2)
 	{
 		a->size = 0;
-		argv = ft_split(argv[1], ' ');
-		if (!argv)
+		arg = ft_split(argv[1], ' ');
+		if (!arg)
 			display_err();
-		while (argv[a->size])
+		while (arg[a->size])
 		{
-			n[a->size] = ft_atoi(argv[a->size]);
-			free(argv[a->size++]);
+			n[a->size] = ft_atoi(arg[a->size]);
+			free(arg[a->size++]);
 		}
-		free(argv);
+		free(arg); /*...valgrind it*/
 	}
 	else
 	{
@@ -123,49 +125,45 @@ static void	get_nums(char **argv, t_stack *a, int *n, int argc)
 int	main(int argc, char **argv)
 {
 	int		n[argc - 1];
-	int		sorted[argc - 1];
 	t_stack	a;
 	t_stack	b;
+	int		sorted[argc - 1];
 	int		i;
 
+	a.head = NULL;
 	if (!arg_check(argv + 1))
 		display_err();
 	get_nums(argv, &a, n, argc);
-	if(!num_check(n, a.size, sorted))
+//	printf("*n = %d %d %d ...\n", n[0], n[1], n[2]);
+//	printf("*copy = %d %d %d ...\n", sorted[0], sorted[1], sorted[2]);
+	if (search(a, n))
+		return (0);
+	if(!num_check(n, a.size/*, sorted*/))
 		display_err();
+	printf("*n = %d %d %d ...\n", n[0], n[1], n[2]);
+//	printf("*copy = %d %d %d ...\n", sorted[0], sorted[1], sorted[2]);
 	i = a.size;
 	while (i-- > 0)
 	{
 		lstadd_front(&a, lstnew(n[i]));
 		if (!a.head)
 			display_err();
-		a.head->index = get_index(n[i], sorted, a.size); /*NEED SORT ARRAY <--------*/
+//		if (a.size > SHORT_LST)
+//			a.head->index = get_index(n[i], sorted, a.size); /*NEED SORT ARRAY <-------- bypass if size < 5*/
 	}
-	if (!search(a) && a.size) // <--------------malloc'ing the whole list just to check if ordered not clever. ---> Check beforehand <---
-	{
 		/*--------------TEST ZONE------------------*/
-/*		printf("stack a:\n");
-		printlst(a.head);*/
-//		printf("closest = %d\n", find_closest(&a, 0));
-//		quick_sort(&a);
-/*		if (a.size <= 5)
+		printf("stack a:\n");
+		printlst(a.head);
+		if (a.size <= SHORT_LST)
 			sort_small(&a, &b);
 		else
-			radix_sort(&a, &b);*/
+			radix_sort(&a, &b);
 		printf("stack a:\n");
 		printlst(a.head);
-		printf("last: %d\n", a.last->n);
-//		exec("pb", &a, &b);
-//		printf("last b: %d\n", b.last->n);
-		printf("head = %d, head->next = %d, head->next->next = %d, last->prev = %d, last->prev->prev = %d\n", a.head->n, a.head->next->n, a.head->next->next->n, a.last->prev->n, a.last->prev->prev->n);
-		exec("sa", &a, 0);
-		printf("head = %d, head->next = %d, head->next->next = %d, last->prev = %d, last->prev->prev = %d\n", a.head->n, a.head->next->n, a.head->next->next->n, a.last->prev->n, a.last->prev->prev->n);
-//		printf("last a: %d\tlast prev: %d\tlast next: %d\thead next: %d\thead prev: %d\n", a.last->n, a.last->prev->n, 0/*&a.last->next*/, a.head->next->n, 0/*&a.head->prev*/);
-		printf("stack a:\n");
-		printlst(a.head);
-	/*--------------TEST ZONE------------------*/
 
-	}
+	printf("stack a:\n");
+		printlst(a.head);*/
+	/*--------------TEST ZONE------------------*/
 	lstclear(&a.head);
 	return (0);
 }

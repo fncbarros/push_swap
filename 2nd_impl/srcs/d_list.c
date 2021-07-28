@@ -35,7 +35,7 @@ void	lstadd_front(t_stack *s, t_dlist *new_elmt)
 	else if (new_elmt)
 	{
 		(*new_elmt).next = s->head;
-		s->head->prev = new_elmt;
+		s->head->prev = new_elmt; //EXC_BAD_ACCESS for some reason
 		s->head = new_elmt;
 	}
 }

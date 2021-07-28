@@ -40,7 +40,7 @@ void printlst(t_dlist *tmp);
 void	display_err(void);
 t_stack	*b_init(void);
 void	push(t_stack *src, t_stack *dst);
-int		search(t_stack s, int *a);
+int		search(t_stack s, const int *a);
 void	swap(t_stack *s);
 void	rotate(t_stack *s, char r);
 void	exec(char *arg, t_stack *a, t_stack *b);
