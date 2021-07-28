@@ -74,15 +74,22 @@ static int	num_check(int *n, int len, int *copy)
 	return (1);
 }
 
-static int	get_index(int number, int *index) //swich to binary search
+static int	get_index(int number, int *index, int size)
 /*Not yet in use*/
 {
 	int	i;
 
-	i = 1;
-	while (index[i] != number)
-		i++;
-	return (i);
+	i = size / 2;
+	if (i < 0 || i >= size || !index[i])
+		return (0);
+	if (number != index[i])
+	{
+		if (number < index[i])
+			return(get_index(number, index, i));
+		else
+			return(get_index(number, index , size + (i + 1)));
+	}
+	return (i + 1);
 }
 
 static void	get_nums(char **argv, t_stack *a, int *n, int argc)
@@ -132,7 +139,7 @@ int	main(int argc, char **argv)
 		lstadd_front(&a, lstnew(n[i]));
 		if (!a.head)
 			display_err();
-		a.head->index = get_index(n[i], sorted); /*NEED SORT ARRAY <--------*/
+		a.head->index = get_index(n[i], sorted, a.size); /*NEED SORT ARRAY <--------*/
 	}
 	if (!search(a) && a.size) // <--------------malloc'ing the whole list just to check if ordered not clever. ---> Check beforehand <---
 	{
