@@ -32,7 +32,7 @@ void	lstadd_front(t_stack *s, t_dlist *new_elmt)
 		s->last = new_elmt;
 		return ;
 	}
-	if (new_elmt != NULL)
+	else if (new_elmt)
 	{
 		(*new_elmt).next = s->head;
 		s->head->prev = new_elmt;

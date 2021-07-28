@@ -18,8 +18,9 @@ void	display_err(void)
 	exit(1);
 }
 
-int	search(t_stack s)
-/*...or int search(t_stack *s)??
+int	search(t_stack s, const int *a)
+/* searches stack or array
+...or int search(t_stack *s)??
  * return 0 if out of order
  *if s.head->next != NULL
 	return i is a bit useless
@@ -27,9 +28,19 @@ int	search(t_stack s)
 {
 	ssize_t	i;
 
-	if (!s.head)
+	if (!s.head && !a)
 		return (0);
 	i = 1;
+	if (a)
+	{
+		while (i < s.size)
+		{
+			if (a[i] < a[i - 1])
+				return (0);
+			i++;
+		}
+		return (i);
+	}
 	while (s.head->next &&
 		s.head->n < s.head->next->n)
 	{

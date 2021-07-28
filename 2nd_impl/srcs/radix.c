@@ -21,9 +21,9 @@ void	radix_sort(t_stack *a, t_stack *b)
 /*	find_first(a, 1, 10);
 	exec("pb", a, b);
 	return ;
-*/	while(!search(*a) || b->size)
+*/	while(!search(*a, 0) || b->size)
 	{
-		dec = 9;
+		dec = 0;
 		while (dec > 9 && a->size) //do not want to empty stack_a entirely <-------
 		{
 			dec -= find_closest(a, mod, dec);

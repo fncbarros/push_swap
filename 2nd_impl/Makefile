@@ -18,7 +18,7 @@
 
 SRCS	= srcs/utils.c srcs/main.c srcs/operations.c srcs/pop.c srcs/push.c \
 		srcs/push_swap.c srcs/rotate.c srcs/swap.c srcs/sort_small.c \
-		srcs/d_list.c srcs/radix.c
+		srcs/d_list.c srcs/radix.c srcs/sort_array.c
 
 OBJS	= $(SRCS:.c=.o)
 
