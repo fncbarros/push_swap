@@ -49,7 +49,7 @@ void	sort_small(t_stack *a, t_stack *b)
 		find_smallest(a);
 		exec("pb", a, b);
 	}
-	while (!search(*a, 0) || b->size)
+	while (!s_search(*a) || b->size)
 	{
 		top = a->head->n;
 		bottom = lstlast(a->head)->n;
@@ -59,7 +59,7 @@ void	sort_small(t_stack *a, t_stack *b)
 			exec("sa", a, 0);
 		else if (a->head->next->n > bottom)
 			exec("rra", a, 0);
-		if (b->size && search(*a, 0))
+		if (b->size && s_search(*a))
 			exec("pa", a, b);
 	}
 }

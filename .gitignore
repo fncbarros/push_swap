@@ -69,3 +69,7 @@ dkms.conf
 tester_linux/output_info.c
 tester_linux/tester.sh
 2nd_impl/tester_linux/tester.sh
+push_swap_result.txt
+2nd_impl/checker
+2nd_impl/tester_mac/output.txt
+2nd_impl/tester_mac/output.txt

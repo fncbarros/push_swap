@@ -18,7 +18,23 @@ void	display_err(void)
 	exit(1);
 }
 
-int	search(t_stack s, const int *a)
+int a_search(const int *a, int len)
+{
+	int	i;
+
+	if (!a)
+		return (0);
+	i = 1;
+	while (i < len)
+	{
+		if (a[i] < a[i - 1])
+			return (0);
+		i++;
+	}
+	return (i);
+}
+
+int	s_search(t_stack s)
 /* searches stack or array
 ...or int search(t_stack *s)??
  * return 0 if out of order
@@ -28,19 +44,9 @@ int	search(t_stack s, const int *a)
 {
 	ssize_t	i;
 
-	if (!s.head && !a)
+	if (!s.head)
 		return (0);
 	i = 1;
-	if (a)
-	{
-		while (i < s.size)
-		{
-			if (a[i] < a[i - 1])
-				return (0);
-			i++;
-		}
-		return (i);
-	}
 	while (s.head->next &&
 		s.head->n < s.head->next->n)
 	{
@@ -68,55 +74,3 @@ static t_dlist	*get_middle(t_stack a)
 	return (tmp);
 }
 
-static int ft_rotate(t_stack *a, int rot, char *dir)
-/*rotates a rot times in dir direction
-	does nothing and returns 1 if rot is -1
-only working for stack a atm; not very versatile*/
-{
-	if (rot == -1)
-		return (1);
-	while (rot--)
-		exec(dir, a, 0);
-	return (0);
-}
-
-int	find_closest(t_stack *a, int mod, int dec)
-/*finds looked for element closest to extremes(top/bottom) and brings it to top
-returns -1 if none found*/
-{
-	t_stack		top;
-	t_stack		bottom;
-
-	if (!a->size)
-		return (0);
-	top.head = a->head;
-	top.size = 0;
-	bottom.size = 0;
-	while (top.head && top.size++ < (a->size / 2))
-	{
-		if ((top.head->n / mod) % 10 == dec)
-			break ;
-		top.head = top.head->next;
-	}
-	bottom.head = lstlast(top.head);
-	while (bottom.head && bottom.size <= (a->size / 2))
-	{
-		bottom.size++;
-		if ((bottom.head->n / mod) % 10 == dec && bottom.size < top.size)
-			return (ft_rotate(a, bottom.size, "rra"));
-		bottom.head = bottom.head->prev;
-	}
-	if (top.size > (a->size / 2) && (top.head->n / mod) % 10 != dec)
-		top.size = 0;
-	/*if tmp.size > i: tmp.size = i*/
-//	printf("\ntop = %d\tbottom = %d\t", top.size, bottom.size);
-	return (ft_rotate(a, --top.size, "ra"));
-/*return (ft_rotate(a, top, bottom));*/
-}
-
-/* ^^^ ------------------------------------------------------------------------------ ^^^
-		maybe pass a copy of a->head to save a line (t_dlist a, int condition)
-		maybe return absolute index number instead of relative to top/bottom (0 - a.size)
-		... or call a rotating function instead
-		...or pass char rot == "ra" or "raa" depending on value returned
-   ^^^ ------------------------------------------------------------------------------ ^^^	*/
