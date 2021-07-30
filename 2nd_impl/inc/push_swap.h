@@ -48,6 +48,7 @@ void	rotate(t_stack *s, char r);
 void	exec(char *arg, t_stack *a, t_stack *b);
 //int		find_closest(t_stack *a, int i);
 void	sort_array(int *lst, int len);
+int		_atoi(const char *str);
 
 t_dlist	*lstnew(int content);
 t_dlist	*lstlast(t_dlist *lst);

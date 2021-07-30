@@ -42,6 +42,5 @@ void	exec(char *arg, t_stack *a, t_stack *b)
 		else if ( *(arg + i)== 'b' || *(arg + i) == 'r')
 			rotate(b, r);
 	}
-	ft_putstr_fd(arg, 1);
-	ft_putchar_fd('\n', 1);
+	ft_putendl_fd(arg, 1);
 }
