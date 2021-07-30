@@ -54,7 +54,7 @@ static int	arg_check(char **arg)
 	return (1);
 }
 
-static int	num_check(int *n, int len/*, int *copy*/)
+static int	num_check(const double *n, int len/*, int *copy*/)
 {
 	int i;
 	int j;
@@ -63,6 +63,8 @@ static int	num_check(int *n, int len/*, int *copy*/)
 	while (++i < len)
 	{
 //		copy[i] = n[i];
+		if (n[i] > INT_MAX || n[i] < INT_MIN)
+			display_err();
 		j = i;
 		while (++j < len)
 		{
@@ -93,7 +95,7 @@ static int	get_index(int number, int *index, int size)
 	return (i + 1);
 }
 
-static void	get_nums(char **argv, t_stack *a, int *n, int argc)
+static void	get_nums(char **argv, t_stack *a, double *n, int argc)
 {
 	char	**arg;
 
@@ -110,7 +112,7 @@ static void	get_nums(char **argv, t_stack *a, int *n, int argc)
 			n[a->size] = ft_atoi(arg[a->size]);
 			free(arg[a->size++]);
 		}
-		free(arg); /*...valgrind it*/
+		free(arg);
 	}
 	else
 	{
@@ -124,45 +126,40 @@ static void	get_nums(char **argv, t_stack *a, int *n, int argc)
 
 int	main(int argc, char **argv)
 {
-	int		n[argc - 1];
+	double	n[argc - 1];
 	t_stack	a;
-	t_stack	b;
-	int		sorted[argc - 1];
+//	int		sorted[argc - 1];
 	int		i;
+	t_stack	b;
 
 	a.head = NULL;
+	b.size = 0;
 	if (!arg_check(argv + 1))
 		display_err();
 	get_nums(argv, &a, n, argc);
-//	printf("*n = %d %d %d ...\n", n[0], n[1], n[2]);
-//	printf("*copy = %d %d %d ...\n", sorted[0], sorted[1], sorted[2]);
-	if (search(a, n))
+	if (a_search(n, a.size))
 		return (0);
 	if(!num_check(n, a.size/*, sorted*/))
 		display_err();
-	printf("*n = %d %d %d ...\n", n[0], n[1], n[2]);
-//	printf("*copy = %d %d %d ...\n", sorted[0], sorted[1], sorted[2]);
 	i = a.size;
 	while (i-- > 0)
 	{
-		lstadd_front(&a, lstnew(n[i]));
+		lstadd_front(&a, lstnew((int)n[i]));
 		if (!a.head)
 			display_err();
-//		if (a.size > SHORT_LST)
+//		if (a.size > SHORT_LST) //Not to execute if no negatives on list
 //			a.head->index = get_index(n[i], sorted, a.size); /*NEED SORT ARRAY <-------- bypass if size < 5*/
 	}
-		/*--------------TEST ZONE------------------*/
-		printf("stack a:\n");
-		printlst(a.head);
+	/*--------------TEST ZONE------------------*/
+//		printf("stack a:\n\n");
+//		printlst(a.head);
 		if (a.size <= SHORT_LST)
 			sort_small(&a, &b);
 		else
 			radix_sort(&a, &b);
-		printf("stack a:\n");
-		printlst(a.head);
+//		printf("stack a:\n");
+//		printlst(a.head);
 
-	printf("stack a:\n");
-		printlst(a.head);*/
 	/*--------------TEST ZONE------------------*/
 	lstclear(&a.head);
 	return (0);
