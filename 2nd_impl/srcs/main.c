@@ -54,7 +54,7 @@ static int	arg_check(char **arg)
 	return (1);
 }
 
-static int	num_check(const double *n, int len/*, int *copy*/)
+static int	num_check(const int *n, int len/*, int *copy*/)
 {
 	int i;
 	int j;
@@ -63,8 +63,7 @@ static int	num_check(const double *n, int len/*, int *copy*/)
 	while (++i < len)
 	{
 //		copy[i] = n[i];
-		if (n[i] > INT_MAX || n[i] < INT_MIN)
-			display_err();
+		
 		j = i;
 		while (++j < len)
 		{
@@ -95,7 +94,7 @@ static int	get_index(int number, int *index, int size)
 	return (i + 1);
 }
 
-static void	get_nums(char **argv, t_stack *a, double *n, int argc)
+static void	get_nums(char **argv, t_stack *a, int *n, int argc)
 {
 	char	**arg;
 
@@ -118,7 +117,7 @@ static void	get_nums(char **argv, t_stack *a, double *n, int argc)
 	{
 		while (a->size < argc && argv[a->size + 1])
 		{
-			n[a->size] = ft_atoi(argv[a->size + 1]);
+			n[a->size] = _atoi(argv[a->size + 1]);
 			a->size++;
 		}
 	}
@@ -126,7 +125,7 @@ static void	get_nums(char **argv, t_stack *a, double *n, int argc)
 
 int	main(int argc, char **argv)
 {
-	double	n[argc - 1];
+	int		n[argc - 1];
 	t_stack	a;
 //	int		sorted[argc - 1];
 	int		i;
