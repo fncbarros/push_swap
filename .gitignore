@@ -11,6 +11,7 @@ push_swap
 .*~
 tester-mac/
 debug
+original/
 
 # Prerequisites
 *.d
