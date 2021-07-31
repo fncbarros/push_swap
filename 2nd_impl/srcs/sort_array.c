@@ -17,21 +17,23 @@
 
 }
 */
-int	*sort_array(const int *lst, int len)
+void	sort_array(int *lst, int len)
 /*Stuppidest shit ever
  Heap sort*/
 {
-	int	ret[len];
+	(void)lst;
+	(void)len;
+/*	int	ret[len];
 	int	i;
 
 	i = 0;
-	ret[i] = lst[i];
+	ret[i] = lst[i];*/
 /*	while (lst[i])
 	{
 		if ();
 	}
 	return (heap_sort(ret));*/
-	return (0);
+	return ;
 }
 
 
