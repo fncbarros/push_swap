@@ -6,14 +6,15 @@
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 13:19:55 by fbarros           #+#    #+#             */
-/*   Updated: 2021/07/24 15:35:21 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/08/04 23:18:14 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
 /*---------------TEMPORARY-----------------*/
-void printlst(t_stack *s, char arg)
+
+void	printlst(t_stack *s, char arg)
 {
 	t_dlist	*tmp;
 
@@ -45,8 +46,8 @@ void printlst(t_stack *s, char arg)
 static int	arg_check(char **arg)
 /*MAX_INT MIN_INT ...:<-----------------------------*/
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (arg[i])
@@ -66,16 +67,14 @@ static int	arg_check(char **arg)
 	return (1);
 }
 
-static int	num_check(const int *n, int len/*, int *copy*/)
+static int	num_check(const int *n, int len)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < len)
 	{
-//		copy[i] = n[i];
-
 		j = i;
 		while (++j < len)
 		{
@@ -83,8 +82,6 @@ static int	num_check(const int *n, int len/*, int *copy*/)
 				return (0);
 		}
 	}
-//	if (len > SHORT_LST) /*bypass in case size < 5*/
-//		copy = day(n, len); //still need to build; if sorted ??
 	return (1);
 }
 
@@ -99,9 +96,9 @@ static int	get_index(int number, int *index, int size)
 	if (number != index[i])
 	{
 		if (number < index[i])
-			return(get_index(number, index, i));
+			return (get_index(number, index, i));
 		else
-			return(get_index(number, index , size + (i + 1)));
+			return (get_index(number, index, size + (i + 1)));
 	}
 	return (i + 1);
 }
@@ -136,11 +133,12 @@ static void	get_nums(char **argv, t_stack *a, int *n, int argc)
 }
 
 int	main(int argc, char **argv)
+/*Replace variable length array n[argc-1]
+ * Too many lines*/
 {
-	int		n[argc - 1];
+	int	n[argc - 1];
+	int	i;
 	t_stack	a;
-//	int		sorted[argc - 1];
-	int		i;
 	t_stack	b;
 
 	a.head = NULL;
@@ -150,7 +148,7 @@ int	main(int argc, char **argv)
 	get_nums(argv, &a, n, argc);
 	if (a_search(n, a.size))
 		return (0);
-	if(!num_check(n, a.size/*, sorted*/))
+	if (!num_check(n, a.size))
 		display_err();
 	i = a.size;
 	while (i-- > 0)
@@ -158,35 +156,18 @@ int	main(int argc, char **argv)
 		lstadd_front(&a, lstnew((int)n[i]));
 		if (!a.head)
 			display_err();
-//		if (a.size > SHORT_LST) //Not to execute if no negatives on list
-//			a.head->index = get_index(n[i], sorted, a.size); /*NEED SORT ARRAY <-------- bypass if size < 5*/
+/*		if (a.size > SHORT_LST) //Not to execute if no negatives on list
+			a.head->index = get_index(n[i], sorted, a.size);*/
 	}
 	/*--------------TEST ZONE------------------*/
-//		printf("stack a:\n\n");
-//		printlst(&a, 0);
-
-/*		printlst(&a, 0);
-
-		exec("pb", &a, &b);
-
-		printlst(&a, 0);
-		printlst(&a, 'r');
-
-		exec("pb", &a, &b);
-
-		printlst(&a, 0);
-		printlst(&a, 'r');
-*/
-
-		if (a.size <= SHORT_LST)
-			sort_small(&a, &b);
-		else
-			radix_sort(&a, &b);
-
-
-//		printf("stack a:\n");
-//		printlst(&a, 0);
-
+/*		printf("stack a:\n\n");
+		printlst(&a, 0);*/
+	if (a.size <= SHORT_LST)
+		sort_small(&a, &b);
+	else
+		radix_sort(&a, &b);
+/*		printf("stack a:\n");
+		printlst(&a, 0);*/
 	/*--------------TEST ZONE------------------*/
 	lstclear(&a.head);
 	return (0);

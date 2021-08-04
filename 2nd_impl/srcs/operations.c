@@ -1,24 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarros <fbarros@student.42lisboa.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 12:39:07 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/29 16:01:14 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/08/04 23:06:26 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void	exec(char *arg, t_stack *a, t_stack *b)
+static void	op_rotate(char *arg, t_stack *a, t_stack *b)
 {
-	char	r;
+	int	r;
 	int	i;
 
-	r = 0;
 	i = 0;
+	r = 0;
+	if (ft_strlen(arg) == 3)
+	{
+		r = 'r';
+		i++;
+	}
+	if (*(arg + i) == 'a' || *(arg + i) == 'r')
+		rotate(a, r);
+	else if (*(arg + i) == 'b' || *(arg + i) == 'r')
+		rotate(b, r);
+}
+
+void	exec(char *arg, t_stack *a, t_stack *b)
+{
 	if (ft_strnstr(arg, "pa", 2))
 		push(b, a);
 	else if (ft_strnstr(arg, "pb", 2))
@@ -31,16 +44,6 @@ void	exec(char *arg, t_stack *a, t_stack *b)
 			swap(a);
 	}
 	else if (*arg == 'r')
-	{
-		if (ft_strlen(arg) == 3)
-		{
-			r = 'r';
-			i++;
-		}
-		if (*(arg + i) == 'a' || *(arg + i) == 'r')
-			rotate(a, r);
-		else if ( *(arg + i)== 'b' || *(arg + i) == 'r')
-			rotate(b, r);
-	}
+		op_rotate(arg, a, b)
 	ft_putendl_fd(arg, 1);
 }

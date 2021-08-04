@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_err.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbarros <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 16:15:22 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/29 16:16:48 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/08/04 23:03:01 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	display_err(void)
 	exit(1);
 }
 
-int a_search(const int *a, int len)
+int	a_search(const int *a, int len)
 {
 	int	i;
 
@@ -39,7 +39,6 @@ int	s_search(t_stack s)
 ...or int search(t_stack *s)??
  * return 0 if out of order
  *if s.head->next != NULL
-	return i is a bit useless
  **/
 {
 	ssize_t	i;
@@ -47,8 +46,7 @@ int	s_search(t_stack s)
 	if (!s.head)
 		return (0);
 	i = 1;
-	while (s.head->next &&
-		s.head->n < s.head->next->n)
+	while (s.head->next && s.head->n < s.head->next->n)
 	{
 		s.head = s.head->next;
 		i++;
@@ -68,7 +66,7 @@ static t_dlist	*get_middle(t_stack a)
 
 	i = 0;
 	tmp = a.head;
-	while(i++ < (a.size / 2))
+	while (i++ < (a.size / 2))
 		tmp = tmp->next;
 	return (tmp);
 }
@@ -97,6 +95,6 @@ int	_atoi(const char *str)
 	}
 	n *= neg;
 	if (n > INT_MAX || n < INT_MIN)
-			display_err();
+		display_err();
 	return (n);
 }

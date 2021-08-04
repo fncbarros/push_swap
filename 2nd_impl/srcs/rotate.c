@@ -6,16 +6,13 @@
 /*   By: fbarros <fbarros@student.42lisboa.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 16:24:07 by fbarros           #+#    #+#             */
-/*   Updated: 2021/05/24 19:28:06 by fbarros          ###   ########.fr       */
+/*   Updated: 2021/08/04 22:59:19 by fbarros          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-
-
 void	rotate(t_stack *s, char r)
-/*NOT WORKING W/ 2 ELEMENTS ONLY*/
 {
 	t_dlist	*tmp;
 
