@@ -12,6 +12,8 @@
 
 #include "../inc/push_swap.h"
 
+
+
 void	rotate(t_stack *s, char r)
 /*NOT WORKING W/ 2 ELEMENTS ONLY*/
 {
@@ -31,11 +33,12 @@ void	rotate(t_stack *s, char r)
 	}
 	else
 	{
-		tmp = s->last->prev;
-		tmp->next = NULL;
-		s->last->next = s->head;
-		s->head = s->last;
-		s->head->prev = NULL;
-		s->last = tmp;
+		tmp = s->last;
+		s->last = s->last->prev;
+		s->last->next = NULL;
+		tmp->next = s->head;
+		tmp->prev = NULL;
+		s->head->prev = tmp;
+		s->head = tmp;
 	}
 }

@@ -13,8 +13,17 @@
 #include "../inc/push_swap.h"
 
 /*---------------TEMPORARY-----------------*/
-void printlst(t_dlist *tmp)
+void printlst(t_stack *s, char arg)
 {
+	t_dlist	*tmp;
+
+	if (arg == 'r')
+	{
+		tmp = s->last;
+		printf("REVERSE\n");
+	}
+	else
+		tmp = s->head;
 	printf("--------\n");
 	if (!tmp)
 	{
@@ -24,7 +33,10 @@ void printlst(t_dlist *tmp)
 	while (tmp)
 	{
 		printf("%d\n", tmp->n);
-		tmp = tmp->next;
+		if (arg == 'r')
+			tmp = tmp->prev;
+		else
+			tmp = tmp->next;
 	}
 	printf("--------\n");
 }
@@ -63,7 +75,7 @@ static int	num_check(const int *n, int len/*, int *copy*/)
 	while (++i < len)
 	{
 //		copy[i] = n[i];
-		
+
 		j = i;
 		while (++j < len)
 		{
@@ -72,7 +84,7 @@ static int	num_check(const int *n, int len/*, int *copy*/)
 		}
 	}
 //	if (len > SHORT_LST) /*bypass in case size < 5*/
-//		copy = sort_array(n, len); //still need to build; if sorted ??
+//		copy = day(n, len); //still need to build; if sorted ??
 	return (1);
 }
 
@@ -151,13 +163,29 @@ int	main(int argc, char **argv)
 	}
 	/*--------------TEST ZONE------------------*/
 //		printf("stack a:\n\n");
-//		printlst(a.head);
+//		printlst(&a, 0);
+
+/*		printlst(&a, 0);
+
+		exec("pb", &a, &b);
+
+		printlst(&a, 0);
+		printlst(&a, 'r');
+
+		exec("pb", &a, &b);
+
+		printlst(&a, 0);
+		printlst(&a, 'r');
+*/
+
 		if (a.size <= SHORT_LST)
 			sort_small(&a, &b);
 		else
 			radix_sort(&a, &b);
+
+
 //		printf("stack a:\n");
-//		printlst(a.head);
+//		printlst(&a, 0);
 
 	/*--------------TEST ZONE------------------*/
 	lstclear(&a.head);

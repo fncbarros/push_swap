@@ -40,7 +40,7 @@ int	s_search(t_stack s)
  * return 0 if out of order
  *if s.head->next != NULL
 	return i is a bit useless
- * */
+ **/
 {
 	ssize_t	i;
 
@@ -70,7 +70,6 @@ static t_dlist	*get_middle(t_stack a)
 	tmp = a.head;
 	while(i++ < (a.size / 2))
 		tmp = tmp->next;
-/*	printf("\nMIDDLE: %d\n\n", *(int *)tmp->content);*/ //<------ REMOVE
 	return (tmp);
 }
 

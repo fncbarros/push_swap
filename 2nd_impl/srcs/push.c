@@ -35,6 +35,10 @@ void	push(t_stack *src, t_stack *dst)
 	}
 	else
 		lstadd_front(dst, tmp);
+	if (src->head)
+		src->head->prev = NULL;
+	if (src->size == 1)
+		src->last = NULL;
 	dst->size++;
 	src->size--;
 }

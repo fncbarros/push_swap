@@ -33,26 +33,32 @@ typedef struct s_stack
 	t_dlist	*last;
 }				t_stack;
 
+typedef struct s_indexes
+{
+	int	l;
+	int	r;
+	int	llen;
+	int	rlen;
+}			t_indexes;
+
+
 /*-----REMOVE------*/
 #include <stdio.h>
-void printlst(t_dlist *tmp);
+void printlst(t_stack *s, char arg);
 /*-----REMOVE------*/
 
 void	display_err(void);
-t_stack	*b_init(void); //REMOVE
 void	push(t_stack *src, t_stack *dst);
 int 	a_search(const int *a, int len);
 int		s_search(t_stack s);
 void	swap(t_stack *s);
 void	rotate(t_stack *s, char r);
 void	exec(char *arg, t_stack *a, t_stack *b);
-//int		find_closest(t_stack *a, int i);
 void	sort_array(int *lst, int len);
 int		_atoi(const char *str);
 
 t_dlist	*lstnew(int content);
 t_dlist	*lstlast(t_dlist *lst);
-//void	lstdelone(t_dlist *lst, void (*del)(int)); //may be useless //REMOVE
 void	lstclear(t_dlist **lst/*, void (*del)(int)*/); //may be useless
 void	lstadd_front(t_stack *s, t_dlist *new_elmt);
 

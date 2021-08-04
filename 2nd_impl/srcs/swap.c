@@ -17,14 +17,7 @@ void	swap(t_stack *s)
 {
 	t_dlist	*tmp;
 	t_dlist	*tmp2;
-/*
-	tmp = NULL;
-	if (s->head->next->next != NULL)
-		tmp = s->head->next->next;
-	tmp2 = s->head;
-	s->head = s->head->next;
-	tmp2->next = tmp;
-	s->head->next = tmp2;*/
+
 	tmp = s->head->next;
 	if (s->head->next->next != NULL)
 		tmp2 = s->head->next->next;
