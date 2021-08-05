@@ -12,6 +12,15 @@
 
 #include "../inc/push_swap.h"
 
+static void	ft_swap(int *a, int *b)
+{
+	int tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
 static void	copy(const int *original, int *left, int *right, t_indexes *id)
 {
 	int	len;
@@ -64,6 +73,41 @@ void	merge_sort(int *a, int l, int h) //Not sure copy would work with recursion;
 //	return (copy); //MERGE BOTH SIDES (malloc and return results or return a)
 }
 
+static int	part(int *a, int l, int r)
+{
+	int	pivot;
+	int	i;
+	int	j;
+
+	pivot = a[r];
+	i = l - 1;
+	j = i;
+	while (++j < r)
+	{
+		if (a[j] < pivot)
+		{
+			i++;
+			ft_swap(a + i, a + j);
+		}
+	}
+	ft_swap(a + (i + 1), a + r);
+	return (i + 1);
+}
+
+void	quicksort(int *a, int l, int r)
+/*--------------NOT YET TESTED------------*/
+{
+	int	i; //or int *i??
+
+	i = 0;
+	if (l >= r)
+		return ;
+	i = part(a, l, r);
+	quicksort(a, l, i - 1);
+	quicksort(a, i + 1, r);
+	/*^----??----^*/
+}
+
 int main(void)
 {
 	int array[] = {5, 3, 4, 1, 9, 6, 0, 2}; //TEST ODD NUMBERS
@@ -72,7 +116,8 @@ int main(void)
 
 	while (++i < len)
 		printf("%d\t", array[i]);
-	merge_sort(array, 0, len);
+	//merge_sort(array, 0, len);
+	quicksort(array, 0, len); //or len - 1
 	i = -1;
 	printf("\nAfter merge: \n");
 	while (++i < len)
