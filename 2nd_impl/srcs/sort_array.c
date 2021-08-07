@@ -39,8 +39,8 @@ static void	copy(const int *original, int *left, int *right, t_indexes *id)
 
 static void	merge(int *a, int l, int h, int m) //no actual need for m here
 {
-	int			left[(m - l)];
-	int			right[(h - m)];
+	int			left[(m - l)]; //not permitted
+	int			right[(h - m)]; //not permitted
 	t_indexes	id;
 
 	id.llen = m - l;
@@ -100,17 +100,17 @@ void	quicksort(int *a, int l, int r)
 	int	i; //or int *i??
 
 	i = 0;
-	if (l >= r)
+	if (l > r - 1)
 		return ;
 	i = part(a, l, r);
 	quicksort(a, l, i - 1);
 	quicksort(a, i + 1, r);
 	/*^----??----^*/
 }
-
+/*
 int main(void)
 {
-	int array[] = {5, 3, 4, 1, 9, 6, 0, 2}; //TEST ODD NUMBERS
+	int array[] = {6, 5, 4, 3, 2 ,1}; //TEST ODD NUMBERS
 	int len = sizeof(array) / sizeof(array[0]);
 	int	i = -1;
 
@@ -119,7 +119,8 @@ int main(void)
 	//merge_sort(array, 0, len);
 	quicksort(array, 0, len); //or len - 1
 	i = -1;
-	printf("\nAfter merge: \n");
-	while (++i < len)
-		printf("%d\t", array[i]);
+	printf("\nAfter merge: \nlen = %d\n", len);
+	while (++i <= len)
+		printf("i%d\t%d\n", i, array[i]);
 }
+*/

@@ -33,7 +33,10 @@ void	printlst(t_stack *s, char arg)
 	}
 	while (tmp)
 	{
-		printf("%d\n", tmp->n);
+		if (arg == 'i')
+			printf("(index)%d\n", tmp->index);
+		else
+			printf("%d\n", tmp->n);
 		if (arg == 'r')
 			tmp = tmp->prev;
 		else
@@ -67,12 +70,13 @@ static int	arg_check(char **arg)
 	return (1);
 }
 
-static int	num_check(const int *n, int len)
+static int	num_check(const int *n, int len, t_stack *a)
 {
 	int	i;
 	int	j;
 
 	i = -1;
+	a->neg = 0;
 	while (++i < len)
 	{
 		j = i;
@@ -80,6 +84,9 @@ static int	num_check(const int *n, int len)
 		{
 			if (n[i] == n[j])
 				return (0);
+			if (!a->neg && n[i] < 0)
+			/*neg flag*/
+				a->neg = 1;
 		}
 	}
 	return (1);
@@ -107,6 +114,7 @@ static void	get_nums(char **argv, t_stack *a, int *n, int argc)
 {
 	char	**arg;
 
+	a->head = NULL;
 	a->size = 0;
 	arg = NULL;
 	if (argc == 2)
@@ -117,7 +125,7 @@ static void	get_nums(char **argv, t_stack *a, int *n, int argc)
 			display_err();
 		while (arg[a->size])
 		{
-			n[a->size] = ft_atoi(arg[a->size]);
+			n[a->size] = _atoi(arg[a->size]);
 			free(arg[a->size++]);
 		}
 		free(arg);
@@ -136,19 +144,22 @@ int	main(int argc, char **argv)
 /*Replace variable length array n[argc-1]
  * Too many lines*/
 {
-	int	n[argc - 1];
+	int	*n; //malloc argc -1 elements
 	int	i;
+	t_dlist	*tmp;
 	t_stack	a;
 	t_stack	b;
 
-	a.head = NULL;
 	b.size = 0;
+	n = (int *)malloc(sizeof(int) * (argc));
+	if (!n)
+		display_err();
 	if (!arg_check(argv + 1))
 		display_err();
 	get_nums(argv, &a, n, argc);
 	if (a_search(n, a.size))
 		return (0);
-	if (!num_check(n, a.size))
+	if (!num_check(n, a.size, &a))
 		display_err();
 	i = a.size;
 	while (i-- > 0)
@@ -156,19 +167,30 @@ int	main(int argc, char **argv)
 		lstadd_front(&a, lstnew((int)n[i]));
 		if (!a.head)
 			display_err();
-/*		if (a.size > SHORT_LST) //Not to execute if no negatives on list
-			a.head->index = get_index(n[i], sorted, a.size);*/
+	}
+	tmp = a.head;
+	quicksort(n, 0, argc - 1);
+	if (a.size > SHORT_LST /*&& a.neg*/) //Not to execute if no negatives on list; CREATE NEG FLAG ON T_STACK -> NEVERMIND
+	{
+		while (tmp)
+		{
+				tmp->index = get_index(tmp->n, n, a.size);
+			tmp = tmp->next;
+		}
 	}
 	/*--------------TEST ZONE------------------*/
-/*		printf("stack a:\n\n");
-		printlst(&a, 0);*/
+		printf("stack a:\n\n");
+		printlst(&a, 0);
+		printlst(&a, 'i');
 	if (a.size <= SHORT_LST)
 		sort_small(&a, &b);
 	else
 		radix_sort(&a, &b);
-/*		printf("stack a:\n");
-		printlst(&a, 0);*/
+		printf("stack a:\n");
+		printlst(&a, 0);
+		printlst(&a, 'i');
 	/*--------------TEST ZONE------------------*/
+	free(n);
 	lstclear(&a.head);
 	return (0);
 }

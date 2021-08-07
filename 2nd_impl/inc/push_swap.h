@@ -16,10 +16,6 @@
 # include "libft.h"
 # include <limits.h>
 
-/*-----REMOVE------*/
-# include <stdio.h>
-void	printlst(t_stack *s, char arg);
-/*-----REMOVE------*/
 
 # define SHORT_LST 5
 
@@ -36,15 +32,21 @@ typedef struct s_stack
 	t_dlist	*head;
 	int		size;
 	t_dlist	*last;
+	int		neg;
 }	t_stack;
 
-typedef struct s_indexes
+typedef struct s_indexes /*??????*/
 {
 	int	l;
 	int	r;
 	int	llen;
 	int	rlen;
 }	t_indexes;
+
+/*-----REMOVE------*/
+# include <stdio.h>
+void	printlst(t_stack *s, char arg);
+/*-----REMOVE------*/
 
 void	display_err(void);
 void	push(t_stack *src, t_stack *dst);
@@ -60,7 +62,8 @@ t_dlist	*lstlast(t_dlist *lst);
 void	lstclear(t_dlist **lst);
 void	lstadd_front(t_stack *s, t_dlist *new_elmt);
 void	sort_small(t_stack *a, t_stack *b);
-void	quick_sort(t_stack *a, t_stack *b);
+//void	quick_sort(t_stack *a, t_stack *b);
+void	quicksort(int *a, int l, int r);
 void	radix_sort(t_stack *a, t_stack *b);
 
 #endif

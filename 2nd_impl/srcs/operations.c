@@ -44,6 +44,6 @@ void	exec(char *arg, t_stack *a, t_stack *b)
 			swap(a);
 	}
 	else if (*arg == 'r')
-		op_rotate(arg, a, b)
+		op_rotate(arg, a, b);
 	ft_putendl_fd(arg, 1);
 }
