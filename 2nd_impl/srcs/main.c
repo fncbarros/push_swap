@@ -99,10 +99,10 @@ int len very stupid idea*/
 	int	i;
 
 	i = size / 2;
-	if (i < 0)
+	if (i <= 0)
 		return (0);
-/*	else if (i >= len)
-		return (len);*/
+	else if (i >= len)
+		return (len);
 	if (number != index[i])
 	{
 		if (number < index[i])
