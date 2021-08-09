@@ -92,22 +92,28 @@ static int	num_check(const int *n, int len, t_stack *a)
 	return (1);
 }
 
-static int	get_index(int number, int *index, int size)
-/*Binary search*/
+static int	get_index(int number, int *index, int size, int len)
+/*Binary search
+int len very stupid idea*/
 {
 	int	i;
 
 	i = size / 2;
-	if (i < 0 || i >= size || !index[i])
+	if (i < 0)
 		return (0);
+/*	else if (i >= len)
+		return (len);*/
 	if (number != index[i])
 	{
 		if (number < index[i])
-			return (get_index(number, index, i));
+			return (get_index(number, index, i, len));
 		else
-			return (get_index(number, index, size + (i + 1)));
+		{
+//			printf("size+i: %d\n", size+i);
+			return (get_index(number, index, size + (i + 1), len));
+		}
 	}
-	return (i + 1);
+	return (i);
 }
 
 static void	get_nums(char **argv, t_stack *a, int *n, int argc)
@@ -169,15 +175,26 @@ int	main(int argc, char **argv)
 			display_err();
 	}
 	tmp = a.head;
-	quicksort(n, 0, argc - 1);
-	if (a.size > SHORT_LST /*&& a.neg*/) //Not to execute if no negatives on list; CREATE NEG FLAG ON T_STACK -> NEVERMIND
+	quicksort(n, 0, a.size);
+	
+	/*----------------------*/
+	i = -1;
+	while (++i < a.size)
+		printf("%d\n", n[i]);
+	/*---------------------*/
+	
+//	if (a.size > SHORT_LST /*&& a.neg*/) //Not to execute if no negatives on list; CREATE NEG FLAG ON T_STACK -> NEVERMIND
 	{
 		while (tmp)
 		{
-				tmp->index = get_index(tmp->n, n, a.size);
+			// printf("--> going through TMP\n");
+			tmp->index = 1 + get_index(tmp->n, n, a.size, a.size);
 			tmp = tmp->next;
 		}
+//		tmp->index = 1 + get_index(tmp->n, n, a.size, a.size);
 	}
+
+
 	/*--------------TEST ZONE------------------*/
 		printf("stack a:\n\n");
 		printlst(&a, 0);

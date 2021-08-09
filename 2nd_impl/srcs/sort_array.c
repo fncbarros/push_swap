@@ -16,6 +16,8 @@ static void	ft_swap(int *a, int *b)
 {
 	int tmp;
 
+	if (!a || !b)
+		return ;
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
@@ -67,7 +69,7 @@ void	merge_sort(int *a, int l, int h) //Not sure copy would work with recursion;
 	if (h > 1) //base case
 	{
 		merge_sort(a, l, m); //DIVIDE LEFT SIDE
-		merge_sort(a + m, m + 1, h); //DIVIDE RIGHT SIDE
+		merge_sort(a + m, m, h - 1); //DIVIDE RIGHT SIDE
 		merge(a, l, h, m); //pass tmp[] instead of m maybe
 	}
 //	return (copy); //MERGE BOTH SIDES (malloc and return results or return a)
@@ -75,22 +77,22 @@ void	merge_sort(int *a, int l, int h) //Not sure copy would work with recursion;
 
 static int	part(int *a, int l, int r)
 {
-	int	pivot;
+	int	*pivot;
 	int	i;
 	int	j;
 
-	pivot = a[r];
+	pivot = &a[r];
 	i = l - 1;
 	j = i;
 	while (++j < r)
 	{
-		if (a[j] < pivot)
+		if (a[j] < *pivot)
 		{
 			i++;
 			ft_swap(a + i, a + j);
 		}
 	}
-	ft_swap(a + (i + 1), a + r);
+	ft_swap(a + (i + 1), pivot);
 	return (i + 1);
 }
 
@@ -100,27 +102,29 @@ void	quicksort(int *a, int l, int r)
 	int	i; //or int *i??
 
 	i = 0;
-	if (l > r - 1)
+	r--;
+	if (l > r)
 		return ;
 	i = part(a, l, r);
-	quicksort(a, l, i - 1);
-	quicksort(a, i + 1, r);
+	quicksort(a, l, i);
+	quicksort(a, i + 1, r + 1);
 	/*^----??----^*/
 }
+
 /*
 int main(void)
 {
-	int array[] = {6, 5, 4, 3, 2 ,1}; //TEST ODD NUMBERS
+	int array[] = {9, -8, 7, -6, 5, 99, -4, 3, 0, 2, 1, 90001, 11}; //TEST ODD NUMBERS
 	int len = sizeof(array) / sizeof(array[0]);
 	int	i = -1;
 
 	while (++i < len)
 		printf("%d\t", array[i]);
-	//merge_sort(array, 0, len);
+//	merge_sort(array, 0, len);
 	quicksort(array, 0, len); //or len - 1
 	i = -1;
 	printf("\nAfter merge: \nlen = %d\n", len);
-	while (++i <= len)
-		printf("i%d\t%d\n", i, array[i]);
+	while (++i < len)
+		printf("i%d\t%d\n",  i , array[i]);
 }
 */
