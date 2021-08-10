@@ -132,3 +132,55 @@ void	quick_sort(t_stack *a, t_stack *b)
 	printf("stack b:\n");
 	free(b);
 }
+
+static t_dlist	*get_middle(t_stack a)
+/*finds midpoint in stack if odd or end of upper half if even
+	not really useful atm*/
+{
+	t_dlist	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = a.head;
+	while (i++ < (a.size / 2))
+		tmp = tmp->next;
+	return (tmp);
+}
+
+
+
+static void	merge(int *a, int l, int h, int m) //no actual need for m here
+{
+	int			left[(m - l)]; //not permitted
+	int			right[(h - m)]; //not permitted
+	t_indexes	id;
+
+	id.llen = m - l;
+	id.rlen = h - m;
+	copy(a, left, right, &id);
+	while (id.l < id.llen && id.r < id.rlen)
+	{
+		if (left[id.l] < right[id.r])
+			a[l++] = left[id.l++];
+		else
+			a[l++] = right[id.r++];
+	}
+	while (id.l < id.llen)
+		a[l++] = left[id.l++];
+	while (id.r < id.rlen)
+		a[l++] = right[id.r++];
+}
+
+void	merge_sort(int *a, int l, int h) //Not sure copy would work with recursion;
+{
+	int	m;
+
+	m = h / 2; // middle
+	if (h > 1) //base case
+	{
+		merge_sort(a, l, m); //DIVIDE LEFT SIDE
+		merge_sort(a + m, m, h - 1); //DIVIDE RIGHT SIDE
+		merge(a, l, h, m); //pass tmp[] instead of m maybe
+	}
+//	return (copy); //MERGE BOTH SIDES (malloc and return results or return a)
+}

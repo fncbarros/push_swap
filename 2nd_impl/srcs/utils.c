@@ -57,20 +57,6 @@ int	s_search(t_stack s)
 		return (i);
 }
 
-static t_dlist	*get_middle(t_stack a)
-/*finds midpoint in stack if odd or end of upper half if even
-	not really useful atm*/
-{
-	t_dlist	*tmp;
-	int		i;
-
-	i = 0;
-	tmp = a.head;
-	while (i++ < (a.size / 2))
-		tmp = tmp->next;
-	return (tmp);
-}
-
 int	_atoi(const char *str)
 {
 	long int	n;
@@ -97,4 +83,30 @@ int	_atoi(const char *str)
 	if (n > INT_MAX || n < INT_MIN)
 		display_err();
 	return (n);
+}
+
+int	get_index(int number, int *index, int size, int len)
+/*Binary search
+int len very stupid idea
+Not working at all times*/
+{
+	int	i;
+
+	i = size / 2;
+	// if (i <= 0)
+	// 	return (0);
+	if (i >= len)
+		return (len - 1);
+	if (number != index[i])
+	{
+		if (number == index[i + 1])
+			return (i + 1);
+		else if (number == index[i - 1])
+			return (i - 1);
+		else if (number < index[i])
+			return (get_index(number, index, i, len));
+		else
+			return (get_index(number, index, size + (i + 1), len));
+	}
+	return (i);
 }

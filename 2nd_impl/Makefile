@@ -37,7 +37,7 @@ LIBFT	= libft.a
 LIBFTOBJS	= $(wildcard ./libft/*.o)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -I $(INCLUDE) $< -o $@
+	$(CC) $(CFLAGS) -c -I $(INCLUDE)  $< -o $@
 
 all:	$(NAME)
 
@@ -48,16 +48,6 @@ $(LIBFT):
 
 $(NAME):	$(LIBFT) $(OBJS)
 		$(CC) $(NAME) $(OBJS) $(LIBFT) -o $(NAME)
-
-#---TEMPORARY---#
-
-debug:	$(LIBFT) $(OBJS)
-		gcc $(CFLAGS) $(LIBFTOBJS) $(OBJS) -o debug
-
-test:	debug
-		lldb ./debug
-#		process launch -- $(ARG)
-#---TEMPORARY---#
 
 clean:
 			make clean -C ./libft

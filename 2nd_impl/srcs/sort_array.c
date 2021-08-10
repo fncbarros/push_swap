@@ -14,7 +14,7 @@
 
 static void	ft_swap(int *a, int *b)
 {
-	int tmp;
+	int	tmp;
 
 	if (!a || !b)
 		return ;
@@ -39,42 +39,6 @@ static void	copy(const int *original, int *left, int *right, t_indexes *id)
 	id->l = 0;
 }
 
-static void	merge(int *a, int l, int h, int m) //no actual need for m here
-{
-	int			left[(m - l)]; //not permitted
-	int			right[(h - m)]; //not permitted
-	t_indexes	id;
-
-	id.llen = m - l;
-	id.rlen = h - m;
-	copy(a, left, right, &id);
-	while (id.l < id.llen && id.r < id.rlen)
-	{
-		if (left[id.l] < right[id.r])
-			a[l++] = left[id.l++];
-		else
-			a[l++] = right[id.r++];
-	}
-	while (id.l < id.llen)
-		a[l++] = left[id.l++];
-	while (id.r < id.rlen)
-		a[l++] = right[id.r++];
-}
-
-void	merge_sort(int *a, int l, int h) //Not sure copy would work with recursion;
-{
-	int	m;
-
-	m = h / 2; // middle
-	if (h > 1) //base case
-	{
-		merge_sort(a, l, m); //DIVIDE LEFT SIDE
-		merge_sort(a + m, m, h - 1); //DIVIDE RIGHT SIDE
-		merge(a, l, h, m); //pass tmp[] instead of m maybe
-	}
-//	return (copy); //MERGE BOTH SIDES (malloc and return results or return a)
-}
-
 static int	part(int *a, int l, int r)
 {
 	int	*pivot;
@@ -97,9 +61,8 @@ static int	part(int *a, int l, int r)
 }
 
 void	quicksort(int *a, int l, int r)
-/*--------------NOT YET TESTED------------*/
 {
-	int	i; //or int *i??
+	int	i;
 
 	i = 0;
 	r--;
@@ -108,7 +71,6 @@ void	quicksort(int *a, int l, int r)
 	i = part(a, l, r);
 	quicksort(a, l, i);
 	quicksort(a, i + 1, r + 1);
-	/*^----??----^*/
 }
 
 /*

@@ -13,7 +13,8 @@
 #include "../inc/push_swap.h"
 
 void	radix_sort(t_stack *a, t_stack *b)
-/*line 34: Don't want to rotate on last check*/
+/*line 32: using index instead of value
+line 34: Don't want to rotate on last check*/
 {
 	int	bit_range;
 	int	i;
@@ -29,7 +30,7 @@ void	radix_sort(t_stack *a, t_stack *b)
 		j = size + 1;
 		while (j-- && a->size)
 		{
-			if (((a->head->index >> i) & 1) == 0) //previously a->head->n
+			if (((a->head->n >> i) & 1) == 0) /*CHANGE TO INDEX*/
 				exec("pb", a, b);
 			else if (j)
 				exec("ra", a, b);
