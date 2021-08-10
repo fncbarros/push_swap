@@ -37,7 +37,7 @@ LIBFT	= libft.a
 LIBFTOBJS	= $(wildcard ./libft/*.o)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -I $(INCLUDE)  $< -o $@
+	$(CC) $(CFLAGS) -c -g -I $(INCLUDE)  $< -o $@
 
 all:	$(NAME)
 

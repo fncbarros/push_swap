@@ -85,28 +85,34 @@ int	_atoi(const char *str)
 	return (n);
 }
 
-int	get_index(int number, int *index, int size, int len)
+int	get_index(int number, int *n, int size, int len)
 /*Binary search
 int len very stupid idea
 Not working at all times*/
 {
 	int	i;
+	(void)size;
+	(void)len;
 
-	i = size / 2;
+	i = 0;
+	while (n[i] != number && i < len)
+		i++;
+	return (i);
+/*	i = size / 2;
 	// if (i <= 0)
 	// 	return (0);
 	if (i >= len)
 		return (len - 1);
-	if (number != index[i])
+	if (number != n[i])
 	{
-		if (number == index[i + 1])
+		if (number == n[i + 1])
 			return (i + 1);
-		else if (number == index[i - 1])
+		else if (number == n[i - 1])
 			return (i - 1);
-		else if (number < index[i])
-			return (get_index(number, index, i, len));
+		else if (number < n[i])
+			return (get_index(number, n, i, len));
 		else
-			return (get_index(number, index, size + (i + 1), len));
+			return (get_index(number, n, size + (i + 1), len));
 	}
 	return (i);
-}
+*/}

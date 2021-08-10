@@ -17,7 +17,7 @@
 # include <limits.h>
 
 
-# define SHORT_LST 5
+# define SHORT_LST 10
 
 typedef struct s_dlist
 {
@@ -57,7 +57,7 @@ void	rotate(t_stack *s, char r);
 void	exec(char *arg, t_stack *a, t_stack *b);
 void	sort_array(int *lst, int len);
 int	_atoi(const char *str);
-int	get_index(int number, int *index, int size, int len);
+int	get_index(int number, int *n, int size, int len);
 t_dlist	*lstnew(int content);
 t_dlist	*lstlast(t_dlist *lst);
 void	lstclear(t_dlist **lst);

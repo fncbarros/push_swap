@@ -91,6 +91,18 @@ static int	num_check(const int *n, int len, t_stack *a)
 	return (1);
 }
 
+// void	ft_free_arr_str(char **arr)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (arr[i])
+// 	{
+// 		free(arr[i]);
+// 		i++;
+// 	}
+// }
+
 static void	get_nums(char **argv, t_stack *a, int *n, int argc)
 {
 	char	**arg;
@@ -98,20 +110,22 @@ static void	get_nums(char **argv, t_stack *a, int *n, int argc)
 	a->head = NULL;
 	a->size = 0;
 	arg = NULL;
-	if (argc == 2)
-	{
-		a->size = 0;
-		arg = ft_split(argv[1], ' ');
-		if (!arg)
-			display_err();
-		while (arg[a->size])
-		{
-			n[a->size] = _atoi(arg[a->size]);
-			free(arg[a->size++]);
-		}
-		free(arg);
-	}
-	else
+	// if (argc == 2)
+	// {
+	// 	a->size = 0;
+	// 	arg = ft_split(argv[1], ' ');
+	// 	if (!arg)
+	// 		display_err();
+	// 	while (arg[a->size])
+	// 	{
+	// 		n[a->size] = _atoi(arg[a->size]);
+	// 		free(arg[a->size]);
+	// 		a->size++;
+	// 	}
+	// 	// ft_free_arr_str(arg);
+	// 	free(arg);
+	// }
+	// else
 	{
 		while (a->size < argc && argv[a->size + 1])
 		{
@@ -158,12 +172,12 @@ int	main(int argc, char **argv)
 		// printf("%d\n", n[i]);
 	/*---------------------*/
 
-	if (a.size > SHORT_LST && a.neg) //Not to execute if no negatives on list; CREATE NEG FLAG ON T_STACK -> NEVERMIND
+	if (a.size > SHORT_LST /*&& a.neg*/) //Not to execute if no negatives on list; CREATE NEG FLAG ON T_STACK -> NEVERMIND
 	{
 		while (tmp)
 		{
 			// printf("--> going through TMP\n");
-			tmp->n = (get_index(tmp->n, n, a.size, a.size)) + 1; /*CHANGE TO INDEX <---------------------------------------------------------------*/
+			tmp->index = (get_index(tmp->n, n, a.size, a.size)) + 1; /*CHANGE TO INDEX <---------------------------------------------------------------*/
 			tmp = tmp->next;
 		}
 //		tmp->index = 1 + get_index(tmp->n, n, a.size, a.size);
