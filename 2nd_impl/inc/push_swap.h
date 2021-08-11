@@ -16,7 +16,6 @@
 # include "libft.h"
 # include <limits.h>
 
-
 # define SHORT_LST 10
 
 typedef struct s_dlist
@@ -33,37 +32,27 @@ typedef struct s_stack
 	int		size;
 	t_dlist	*last;
 	int		neg;
+	int		*arr;
 }	t_stack;
 
-typedef struct s_indexes /*??????*/
-{
-	int	l;
-	int	r;
-	int	llen;
-	int	rlen;
-}	t_indexes;
-
-/*-----REMOVE------*/
-# include <stdio.h>
-void	printlst(t_stack *s, char arg);
-/*-----REMOVE------*/
-
-void	display_err(void);
+void	display_err(t_stack *s);
+void	*malloc_n_check(size_t block, t_stack *s);
 void	push(t_stack *src, t_stack *dst);
-int	a_search(const int *a, int len);
-int	s_search(t_stack s);
+int		a_search(int *a, int len);
+int		s_search(t_stack s);
 void	swap(t_stack *s);
 void	rotate(t_stack *s, char r);
 void	exec(char *arg, t_stack *a, t_stack *b);
 void	sort_array(int *lst, int len);
-int	_atoi(const char *str);
-int	get_index(int number, int *n, int size, int len);
-t_dlist	*lstnew(int content);
+int		_atoi(const char *str, t_stack *s);
+int		get_index(int number, int *n, int len);
+
+t_dlist	*lstnew(int content, t_stack *s);
 t_dlist	*lstlast(t_dlist *lst);
 void	lstclear(t_dlist **lst);
 void	lstadd_front(t_stack *s, t_dlist *new_elmt);
+
 void	sort_small(t_stack *a, t_stack *b);
-//void	quick_sort(t_stack *a, t_stack *b);
 void	quicksort(int *a, int l, int r);
 void	radix_sort(t_stack *a, t_stack *b);
 

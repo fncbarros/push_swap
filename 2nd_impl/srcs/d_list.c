@@ -1,13 +1,11 @@
 #include "../inc/push_swap.h"
 
-t_dlist	*lstnew(int content)
+t_dlist	*lstnew(int content, t_stack *s)
 {
 	t_dlist	*lst;
 
 	lst = NULL;
-	lst = (t_dlist *)malloc(sizeof(t_dlist));
-	if (!lst)
-		return (NULL);
+	lst = (t_dlist *)malloc_n_check(sizeof(t_dlist), s);
 	lst->next = NULL;
 	lst->prev = NULL;
 	lst->n = content;

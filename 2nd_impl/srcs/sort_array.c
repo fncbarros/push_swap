@@ -23,22 +23,6 @@ static void	ft_swap(int *a, int *b)
 	*b = tmp;
 }
 
-static void	copy(const int *original, int *left, int *right, t_indexes *id)
-{
-	int	len;
-	int	i;
-
-	len = id->llen + id->rlen;
-	i = -1;
-	id->r = -1;
-	while (++i < id->llen)
-		left[i] = original[i];
-	while (i < len)
-		right[++id->r] = original[i++];
-	id->r = 0;
-	id->l = 0;
-}
-
 static int	part(int *a, int l, int r)
 {
 	int	*pivot;

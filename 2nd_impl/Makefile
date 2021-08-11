@@ -17,7 +17,7 @@
 #---TEMPORARY---#
 
 SRCS	= srcs/utils.c srcs/main.c srcs/operations.c srcs/push.c \
-		srcs/rotate.c srcs/swap.c srcs/sort_small.c \
+		srcs/rotate.c srcs/swap.c srcs/sort_small.c srcs/err_handling.c\
 		srcs/d_list.c srcs/radix.c srcs/sort_array.c
 
 OBJS	= $(SRCS:.c=.o)

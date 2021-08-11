@@ -12,47 +12,14 @@
 
 #include "../inc/push_swap.h"
 
-/*---------------TEMPORARY-----------------*/
-
-void	printlst(t_stack *s, char arg)
-{
-	t_dlist	*tmp;
-
-	if (arg == 'r')
-	{
-		tmp = s->last;
-		printf("REVERSE\n");
-	}
-	else
-		tmp = s->head;
-	printf("--------\n");
-	if (!tmp)
-	{
-		printf("Empty!\n");
-		return ;
-	}
-	while (tmp)
-	{
-		if (arg == 'i')
-			printf("(index)%d\n", tmp->index);
-		else
-			printf("%d\n", tmp->n);
-		if (arg == 'r')
-			tmp = tmp->prev;
-		else
-			tmp = tmp->next;
-	}
-	printf("--------\n");
-}
-/*---------------TEMPORARY-----------------*/
-
-static int	arg_check(char **arg)
-/*MAX_INT MIN_INT ...:<-----------------------------*/
+static void	arg_check(char **arg, int argc)
 {
 	int	i;
 	int	j;
 
 	i = 0;
+	if (argc < 2)
+		exit(0);
 	while (arg[i])
 	{
 		j = -1;
@@ -63,11 +30,13 @@ static int	arg_check(char **arg)
 			if (ft_isspace(arg[i][j]) || arg[i][j] == '-')
 				continue ;
 			if (!ft_isdigit(arg[i][j]))
-				return (0);
+			{
+				ft_putendl_fd("Error", 2);
+				exit (1);
+			}
 		}
 		i++;
 	}
-	return (1);
 }
 
 static int	num_check(const int *n, int len, t_stack *a)
@@ -91,18 +60,6 @@ static int	num_check(const int *n, int len, t_stack *a)
 	return (1);
 }
 
-// void	ft_free_arr_str(char **arr)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (arr[i])
-// 	{
-// 		free(arr[i]);
-// 		i++;
-// 	}
-// }
-
 static void	get_nums(char **argv, t_stack *a, int *n, int argc)
 {
 	char	**arg;
@@ -110,93 +67,55 @@ static void	get_nums(char **argv, t_stack *a, int *n, int argc)
 	a->head = NULL;
 	a->size = 0;
 	arg = NULL;
-	// if (argc == 2)
-	// {
-	// 	a->size = 0;
-	// 	arg = ft_split(argv[1], ' ');
-	// 	if (!arg)
-	// 		display_err();
-	// 	while (arg[a->size])
-	// 	{
-	// 		n[a->size] = _atoi(arg[a->size]);
-	// 		free(arg[a->size]);
-	// 		a->size++;
-	// 	}
-	// 	// ft_free_arr_str(arg);
-	// 	free(arg);
-	// }
-	// else
 	{
 		while (a->size < argc && argv[a->size + 1])
 		{
-			n[a->size] = _atoi(argv[a->size + 1]);
+			n[a->size] = _atoi(argv[a->size + 1], a);
 			a->size++;
 		}
 	}
 }
 
+static void	push_swap(t_stack *a, t_stack *b)
+{
+	t_dlist	*tmp;
+
+	tmp = a->head;
+	quicksort(a->arr, 0, a->size);
+	if (a->size > SHORT_LST)
+	{
+		while (tmp)
+		{
+			tmp->index = (get_index(tmp->n, a->arr, a->size)) + 1;
+			tmp = tmp->next;
+		}
+	}
+	if (a->size <= SHORT_LST)
+		sort_small(a, b);
+	else
+		radix_sort(a, b);
+}
+
 int	main(int argc, char **argv)
-/*Replace variable length array n[argc-1]
- * Too many lines*/
 {
 	int		i;
-	int		*n;
-	t_dlist	*tmp;
 	t_stack	a;
 	t_stack	b;
 
 	b.size = 0;
-	n = (int *)malloc(sizeof(int) * (argc));
-	if (!n)
-		display_err();
-	if (!arg_check(argv + 1))
-		display_err();
-	get_nums(argv, &a, n, argc);
-	if (a_search(n, a.size))
+	a.arr = NULL;
+	arg_check(argv + 1, argc - 1);
+	a.arr = (int *)malloc_n_check(sizeof(int) * (argc), &a);
+	get_nums(argv, &a, a.arr, argc);
+	if (!num_check(a.arr, a.size, &a))
+		display_err(&a);
+	if (a_search(a.arr, a.size))
 		return (0);
-	if (!num_check(n, a.size, &a))
-		display_err();
 	i = a.size;
 	while (i-- > 0)
-	{
-		lstadd_front(&a, lstnew((int)n[i]));
-		if (!a.head)
-			display_err();
-	}
-	tmp = a.head;
-	quicksort(n, 0, a.size);
-
-	/*----------------------*/
-	// i = -1;
-	// while (++i < a.size)
-		// printf("%d\n", n[i]);
-	/*---------------------*/
-
-	if (a.size > SHORT_LST /*&& a.neg*/) //Not to execute if no negatives on list; CREATE NEG FLAG ON T_STACK -> NEVERMIND
-	{
-		while (tmp)
-		{
-			// printf("--> going through TMP\n");
-			tmp->index = (get_index(tmp->n, n, a.size, a.size)) + 1; /*CHANGE TO INDEX <---------------------------------------------------------------*/
-			tmp = tmp->next;
-		}
-//		tmp->index = 1 + get_index(tmp->n, n, a.size, a.size);
-	}
-
-
-	/*--------------TEST ZONE------------------*/
-	// printf("stack a:\n\n");
-	//  printlst(&a, 0);
-	//  printlst(&a, 'i');
-	if (a.size <= SHORT_LST)
-		sort_small(&a, &b);
-	else
-		radix_sort(&a, &b);
-	// printf("stack a:\n");
-	// printlst(&a, 0);
-	// printlst(&a, 'i');
-	/*--------------TEST ZONE------------------*/
-	free(n);
+		lstadd_front(&a, lstnew(a.arr[i], &a));
+	push_swap(&a, &b);
+	free(a.arr);
 	lstclear(&a.head);
 	return (0);
 }

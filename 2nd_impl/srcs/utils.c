@@ -12,13 +12,7 @@
 
 #include "../inc/push_swap.h"
 
-void	display_err(void)
-{
-	ft_putstr_fd("Error\n", 2);
-	exit(1);
-}
-
-int	a_search(const int *a, int len)
+int	a_search(int *a, int len)
 {
 	int	i;
 
@@ -31,6 +25,7 @@ int	a_search(const int *a, int len)
 			return (0);
 		i++;
 	}
+	free(a);
 	return (i);
 }
 
@@ -57,7 +52,7 @@ int	s_search(t_stack s)
 		return (i);
 }
 
-int	_atoi(const char *str)
+int	_atoi(const char *str, t_stack *s)
 {
 	long int	n;
 	int			j;
@@ -81,38 +76,16 @@ int	_atoi(const char *str)
 	}
 	n *= neg;
 	if (n > INT_MAX || n < INT_MIN)
-		display_err();
+		display_err(s);
 	return (n);
 }
 
-int	get_index(int number, int *n, int size, int len)
-/*Binary search
-int len very stupid idea
-Not working at all times*/
+int	get_index(int number, int *n, int len)
 {
 	int	i;
-	(void)size;
-	(void)len;
 
 	i = 0;
 	while (n[i] != number && i < len)
 		i++;
 	return (i);
-/*	i = size / 2;
-	// if (i <= 0)
-	// 	return (0);
-	if (i >= len)
-		return (len - 1);
-	if (number != n[i])
-	{
-		if (number == n[i + 1])
-			return (i + 1);
-		else if (number == n[i - 1])
-			return (i - 1);
-		else if (number < n[i])
-			return (get_index(number, n, i, len));
-		else
-			return (get_index(number, n, size + (i + 1), len));
-	}
-	return (i);
-*/}
+}
