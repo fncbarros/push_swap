@@ -23,12 +23,12 @@ static void	arg_check(char **arg, int argc)
 	while (arg[i])
 	{
 		j = -1;
-		if (arg[i][0] == '-')
-			j++;
 		while (arg[i][++j])
 		{
-			if (ft_isspace(arg[i][j]) || arg[i][j] == '-')
+			if (ft_isspace(arg[i][j]))
 				continue ;
+			if (arg[i][j] == '-')
+				j++;
 			if (!ft_isdigit(arg[i][j]))
 			{
 				ft_putendl_fd("Error", 2);
